@@ -1,0 +1,47 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core"
+	xmlns:commons="sap.ui.commons">
+	<Panel id="questionnairePanelId">
+		<Carousel id="carouselQuestionId" pages="{new>/ZE2E_INS_HDR/ZE2E_INS_DETAILSet}" class="sapUiContentPadding" loop="true">
+			<VBox>
+				<Label text="{parts:[{path:'new>ZZ_DEP_NAME'},{path:'new>ZZ_DEPNDT_TYP'}], formatter: '.formatter.QuestionnaireName' }"/>
+				<f:SimpleForm minWidth="1024" maxContainerCols="1" editable="false" layout="ResponsiveGridLayout" labelSpanL="4" labelSpanM="4"
+					emptySpanL="0" emptySpanM="0" columnsL="2" columnsM="2" class="memberForm">
+					<f:content>
+						<Table id="questionnaireTableId" items="{path:'new>ZE2E_INS_ANS',templateShareable: false}" sticky="ColumnHeaders" class="sapFDynamicPageAlignContent" width="auto">
+							<infoToolbar>
+								<OverflowToolbar>
+									<Label text="Questionnaire"/>
+								</OverflowToolbar>
+							</infoToolbar>
+							<columns>
+								<Column >
+									<Label text="Question"/>
+								</Column>
+								<Column demandPopin="true" minScreenWidth="Tablet" width="15em">
+									<Label text="Anwser" required="true"/>
+								</Column>
+								<Column demandPopin="true" minScreenWidth="Tablet">
+									<Text text="Comments"/>
+								</Column>
+							</columns>
+							<items>
+								<ColumnListItem>
+									<cells>
+										<Text wrapping="true" text="{parts: [{path: 'new>ZZ_QA_KEY'},{path: 'new>/QUESTION'} ], formatter: '.formatter.getQuestion'}"/>
+										<RadioButtonGroup editable="{products>/editable}" selectedIndex="{parts: [{path: 'new>ZZ_ANS'} ], formatter: '.formatter.getRadioIndex'}">
+											<buttons>
+												<RadioButton text="YES"/>
+												<RadioButton text="NO"/>
+											</buttons>
+										</RadioButtonGroup>
+										<TextArea placeholder="Comments" value="{new>ZZ_COMMENTS}" rows="2" width="95%" editable="{products&gt;/editable}"/>
+									</cells>
+								</ColumnListItem>
+							</items>
+						</Table>
+					</f:content>
+				</f:SimpleForm>
+			</VBox>
+		</Carousel>
+	</Panel>
+</core:FragmentDefinition>

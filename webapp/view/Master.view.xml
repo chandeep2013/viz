@@ -1,0 +1,72 @@
+<mvc:View controllerName="com.bosch.hr.swift_trv.controller.Master" xmlns="sap.m" xmlns:f="sap.f" xmlns:mvc="sap.ui.core.mvc">
+	<f:DynamicPage id="dynamicPageId" toggleHeaderOnTitleClick="false" class="sapUiSizeCompact" showFooter="true">
+		<!-- DynamicPage Title -->
+		<f:title>
+			<f:DynamicPageTitle>
+				<f:heading>
+					<Title text="{i18n>MasterTitle}" id="masterTitle"/>
+				</f:heading>
+			</f:DynamicPageTitle>
+		</f:title>
+		<!-- DynamicPage Content -->
+		<f:content class="dynamicPageContent">
+			<VBox fitContainer="true">
+				<!--<OverflowToolbar class="sapFDynamicPageAlignContent">
+						
+					<ToolbarSpacer/>
+				</OverflowToolbar>-->
+				<SearchField id="idSearch" search="onRefreshData" width="26.5rem" liveChange=".onSearch" showRefreshButton="true"
+					placeholder="Search by RequestNo/Pending with/Status"/>
+				<Table id="requestsTable" sticky="ColumnHeaders"  inset="false"
+					items="{ path: 'MyTasks>/', sorter: { path: 'Name' } }" class="sapFDynamicPageAlignContent" width="auto">
+					<!--<headerToolbar>
+						<OverflowToolbar>
+							<content>
+								<SearchField id="idSearch" search="bindDataBasedOnRole" width="98%" liveChange=".onSearch" showRefreshButton="true"
+						placeholder="Search by RequestNo/Pending with/Status"/>busy="{products>/busy}"
+							</content>
+						</OverflowToolbar>
+					</headerToolbar>-->
+					<columns>
+						<Column width="12em">
+							<Label text="{i18n>RequestNo}" design="Bold"/>
+						</Column>
+						<Column hAlign="End">
+							<Label text="{i18n>Status}" design="Bold"/>
+						</Column>
+					</columns>
+					<items>
+						<ColumnListItem type="Navigation" press=".onListItemPress">
+							<cells>
+								<ObjectIdentifier title="{MyTasks>ZZ_DEP_REQ}"
+									text="PendingWith: {parts: [{path:'MyTasks>ZZ_STAT_FLAG'}, {path: 'MyTasks>ZZ_NEXT_APPROVER'} ], formatter: '.formatter.pendingWith'}"/>
+									<!--unit="{parts: [ {path: 'MyTasks>ZZ_DEP_STDATE'} ], formatter: '.formatter.onDateFormat'} - {parts: [ {path: 'MyTasks>ZZ_DEP_ENDATE'} ], formatter: '.formatter.onDateFormat'} "-->
+								<ObjectNumber number="{MyTasks>ZZDEP_SF_TEXT}" 
+									state="{ parts: [ {path: 'MyTasks>ZZDEP_SF_TEXT'} ], formatter: '.formatter.StatusFormatter' }"/>
+							</cells>
+						</ColumnListItem>
+					</items>
+				</Table>
+			</VBox>
+		</f:content>
+		<!-- DynamicPage Footer -->
+		<f:footer>
+			<OverflowToolbar>
+				<MenuButton icon="sap-icon://sort" visible="{products>/butonVisible}">
+					<menu>
+						<Menu>
+							<MenuItem text="{i18n>RequestNo}" press="onSort"/>
+							<MenuItem text="{i18n>PendingWith}" press="onSort"/>
+							<MenuItem text="{i18n>Status}" press="onSort"/>
+						</Menu>
+					</menu>
+				</MenuButton>
+				<OverflowToolbarButton icon="sap-icon://group-2" tooltip="Group" type="Transparent" press=".onView" visible="{products>/butonVisible}" />
+				<!--	<OverflowToolbarButton icon="sap-icon://synchronize" tooltip="Refresh" type="Transparent" press="bindDataBasedOnRole"
+					visible="{products>/butonVisible}"/>-->
+				<ToolbarSpacer/>
+				<Button text="{i18n>Create}" type="Transparent" press=".onAdd" class="CreateButtonClass" visible="{products>/butonVisible}"/>
+			</OverflowToolbar>
+		</f:footer>
+	</f:DynamicPage>
+</mvc:View>

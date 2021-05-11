@@ -1,0 +1,97 @@
+<core:FragmentDefinition xmlns:m="sap.m" xmlns="sap.ui.layout" xmlns:form="sap.ui.layout.form" xmlns:core="sap.ui.core">
+	<m:VBox class="sapUiSmallMargin">
+		<form:SimpleForm editable="false" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4" labelSpanM="4" labelSpanS="4"
+			adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="3" columnsL="2" columnsM="2"
+			singleContainerFullSize="false">
+			<form:content>
+				<core:Title/>
+				<m:Label text="{i18n>TripStart}" design="Bold"/>
+				<m:HBox>
+					<m:Text text="{parts: [ {path: 'detail>/ZZ_DATV1'} ], formatter: '.formatter.onDateFormat'}"/>
+					<m:Text text=""/>
+					<m:Text text=""/>
+				</m:HBox>
+				<m:Label text="{i18n>Tripend}" design="Bold"/>
+				<m:HBox>
+					<m:Text text="{parts: [ {path: 'detail>/ZZ_DATB1'} ], formatter: '.formatter.onDateFormat'}"/>
+					<m:Text text=""/>
+					<m:Text text=""/>
+				</m:HBox>
+				<m:Label text="{i18n>FromCnty}" design="Bold"/>
+				<m:Text text="{parts: [ {path: 'detail>/ZZ_FMCNTRY'} ,{path: 'detail>/CountryList'}], formatter: '.formatter.CountryName' }"/>
+				<m:Label text="{i18n>FromLoc}" design="Bold"/>
+				<m:Text text="{detail>/ZZ_FMLOC}"/>
+				<m:Label text="{i18n>ToCnty}" design="Bold"/>
+				<m:Text text="{parts: [ {path: 'detail>/ZZ_LAND1'} ,{path: 'detail>/CountryList'}], formatter: '.formatter.CountryName' }"/>
+				<m:Label text="{i18n>ToLoc}" design="Bold"/>
+				<m:Text text="{detail>/ZZ_LOCATION_END}"/>
+				<m:Label text="{i18n>Duration}" design="Bold"/>
+				<m:Text text="{detail>/ZZ_ZDURN}"/>
+				<m:Label text="{i18n>VisaCategory}" design="Bold"/>
+				<m:Text text="{ parts: [{path: 'detail>/ZZ_ZVISAT'} ], formatter: '.formatter.onVisaCategory' }"/>
+				<m:Label text="{i18n>TravelCategory}" design="Bold" visible="false"/>
+				<m:Text text="{detail>/ZZ_ZCATG}" visible="false"/>
+				<!--Personal Trips-->
+				<m:Label text="{i18n>PersonalTravel}" design="Bold"
+					visible="{parts:[{path:'detail>/ZZ_TRV_TYP'}, {path:'detail>/ZZ_SMODID'}], formatter: '.formatter.VisiblePersonalTrip'}"/>
+				<m:Text text="{parts:[{path:'detail>/PersFlag'}], formatter: '.formatter.PersFlagSelectedKeyText'}"
+					visible="{parts:[{path:'detail>/ZZ_TRV_TYP'}, {path:'detail>/ZZ_SMODID'}], formatter: '.formatter.VisiblePersonalTrip'}"></m:Text>
+				<m:Label text="{i18n>StartDate}" design="Bold"
+					visible="{parts:[{path:'detail>/PersFlag'}], formatter: '.formatter.VisiblePersonalTripDates'}"/>
+				<m:Text text="{parts: [ {path: 'detail>/Personal_SDate'} ], formatter: '.formatter.onDateFormat'}"
+					visible="{parts:[{path:'detail>/PersFlag'}], formatter: '.formatter.VisiblePersonalTripDates'}"/>
+				<m:Label text="{i18n>EndDate}" design="Bold" visible="{parts:[{path:'detail>/PersFlag'}], formatter: '.formatter.VisiblePersonalTripDates'}"/>
+				<m:Text text="{parts: [ {path: 'detail>/Personal_EDate'} ], formatter: '.formatter.onDateFormat'}"
+					visible="{parts:[{path:'detail>/PersFlag'}], formatter: '.formatter.VisiblePersonalTripDates'}"/>
+				<core:Title/>
+				<m:Label text="{i18n>Insurance}" design="Bold"/>
+				<m:Text text="{parts: [ {path: 'detail>/ZZ_ZINSUR'} ], formatter: '.formatter.onInsurance'}"/>
+				<m:Label text="{i18n>MealPref}" design="Bold"/>
+				<m:Text text="{parts: [ {path: 'detail>/ZZ_ZMEAL'} ,{path: 'detail>/Meal'}], formatter: '.formatter.onMealPreference'}"/>
+				<m:Label text="{i18n>Purpose}" design="Bold"/>
+				<m:Text text="{detail>/ZZ_KUNDE}"/>
+				<m:Label text="{i18n>MobileNo}" design="Bold"/>
+				<m:Text text="{parts: [ {path: 'detail>/ZZ_MOBILE'} ], formatter: '.formatter.onMobile'}"/>
+				<m:Label text="{i18n>TravelTo}" design="Bold"/>
+				<m:Text text="{parts: [ {path: 'detail>/ZZ_CATID'} ], formatter: '.formatter.onTravelTo'}"/>
+				<m:Label text="{i18n>SimRequired}" design="Bold" visible="{parts: [ {path: 'detail>/ZZ_SMODID'} ], formatter: '.formatter.DomeVisible'}"/>
+				<m:Text text="{parts: [ {path: 'detail>/ZZ_SIM_REQ_KEY'} ], formatter: '.formatter.onSmCardRequired'}"
+					visible="{parts: [ {path: 'detail>/ZZ_SMODID'} ], formatter: '.formatter.DomeVisible'}"/>
+				<m:Label text="{i18n>SimType}" design="Bold"
+					visible="{parts: [ {path: 'detail>/ZZ_SIM_REQ_KEY'} ], formatter: '.formatter.onVisibleSimTypeInternet'}"/>
+				<m:Text text="{parts: [ {path: 'detail>/ZZ_SIM_TYP_KEY'} ], formatter: '.formatter.onSmCardType'}"
+					visible="{parts: [ {path: 'detail>/ZZ_SIM_REQ_KEY'} ], formatter: '.formatter.onVisibleSimTypeInternet'}"/>
+				<m:Label text="{i18n>InternetReq}" design="Bold"
+					visible="{parts: [ {path: 'detail>/ZZ_SIM_REQ_KEY'} ], formatter: '.formatter.onVisibleSimTypeInternet'}"/>
+				<m:Text text="{parts: [ {path: 'detail>/ZZ_SIM_DATA_KEY'} ], formatter: '.formatter.onInternetRequired'}"
+					visible="{parts: [ {path: 'detail>/ZZ_SIM_REQ_KEY'} ], formatter: '.formatter.onVisibleSimTypeInternet'}"/>
+				<m:Label text="{i18n>VisaAvailability}" design="Bold"
+					visible="{parts: [ {path: 'detail>/ZZ_SMODID'} ], formatter: '.formatter.DomeVisible'}"/>
+				<m:Text text="{parts: [ {path: 'detail>/view/visaExist'} ], formatter: '.formatter.VisaAvailabilityText'}"
+					visible="{parts: [ {path: 'detail>/ZZ_SMODID'} ], formatter: '.formatter.DomeVisible'}"/>
+				<m:Label></m:Label>
+				<m:Link text="{i18n>VisaDetails}" press="onPressVisaDetails" tooltip="click to view Visa Details"
+					visible="{parts: [ {path: 'detail>/view/visaExist'} ], formatter: '.formatter.onVisibleVisaItems'}"/>
+				<!--<m:Label text="{i18n>From}" design="Bold"
+					visible="{parts: [ {path: 'detail>/view/visaExist'} ], formatter: '.formatter.onVisibleVisaItems'}"/>
+				<m:Text text="{parts: [ {path: 'products>/ZZ_VISA_SDATE'} ], formatter: '.formatter.onDateFormat'}"
+					visible="{parts: [ {path: 'detail>/view/visaExist'} ], formatter: '.formatter.onVisibleVisaItems'}"/>
+				<m:Label text="{i18n>To}" design="Bold" visible="{parts: [ {path: 'detail>/view/visaExist'} ], formatter: '.formatter.onVisibleVisaItems'}"/>
+				<m:Text text="{parts: [ {path: 'products>/ZZ_VISA_EDATE'} ], formatter: '.formatter.onDateFormat'}"
+					visible="{parts: [ {path: 'detail>/view/visaExist'} ], formatter: '.formatter.onVisibleVisaItems'}"/>
+				<m:Label text="{i18n>VisaNo}" design="Bold"
+					visible="{parts: [ {path: 'detail>/view/visaExist'} ], formatter: '.formatter.onVisibleVisaItems'}"/>
+				<m:Text text="{products>/ZZ_VISA_NO}" visible="{parts: [ {path: 'detail>/view/visaExist'} ], formatter: '.formatter.onVisibleVisaItems'}"/>
+				<m:Label text="{i18n>VisaType}" design="Bold"
+					visible="{parts: [ {path: 'detail>/view/visaExist'} ], formatter: '.formatter.onVisibleVisaItems'}"/>
+				<m:Text text="{products>/ZZ_CURR_VISA_TYP}"
+					visible="{parts: [ {path: 'detail>/view/visaExist'} ], formatter: '.formatter.onVisibleVisaItems'}"/>
+				<m:Label text="" visible="{parts: [ {path: 'detail>/view/visaExist'} ], formatter: '.formatter.onVisibleVisaItems'}"></m:Label>
+				<m:Link text="Open File" href="{products>/href}" target="_blank"
+					visible="{parts: [ {path: 'detail>/view/visaExist'} ], formatter: '.formatter.onVisibleVisaItems'}"></m:Link>
+				<m:Label text="{i18n>Comment}" design="Bold" visible="false"/>
+				<m:Text text="{detail>/ZZ_COMMENTS}" width="100%" visible="false"/>-->
+			</form:content>
+		</form:SimpleForm>
+	</m:VBox>
+</core:FragmentDefinition>

@@ -1,0 +1,24 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+    <Dialog  title="Cost Center" class="sapUiSizeCompact" afterClose="onAfterCloseF4Help">
+    	<HeaderContainer>
+    		<Text text=""></Text><!--placeholder="BudgetCenter"-->
+    		<SearchField id="idSearchBudgetCode"  search="OnSearchBudgetCode" liveChange="OnSearchBudgetCode" width="12rem"></SearchField>
+    		<MenuButton icon="sap-icon://sort">
+                    <menu>
+                        <Menu >
+                            <MenuItem text="Ascending" press="onSortBudgetCode" />
+                            <MenuItem text="Descending" press="onSortBudgetCode" />
+                        </Menu>
+                    </menu>
+                </MenuButton>
+    	</HeaderContainer>
+        <VBox>
+            <List id="idListBudgetCode" items="{path:'detail>/BudgetCode',templateShareable:true}">
+                <StandardListItem type="Active" press="_handleValueHelpClose_budgetCode" title="{detail>FIPEX}"  description="{detail>ZZ_BUD_DESC}"/>
+            </List>
+        </VBox>
+        <endButton>
+        	<Button text="Cancel" type="Reject" press="onBudgetCodeCancel" />
+        </endButton>
+    </Dialog>
+</core:FragmentDefinition>

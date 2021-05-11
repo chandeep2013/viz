@@ -1,0 +1,216 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="com.bosch.hr.swift_trv.controller.HrbpReports"
+	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+	xmlns:viz="sap.viz.ui5.controls" xmlns:viz.data="sap.viz.ui5.data" xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds"
+	xmlns:layout="sap.ui.layout" xmlns:f="sap.ui.layout.form" xmlns:comm="sap.suite.ui.commons">
+	<SplitContainer id="SplitContDemo" initialDetail="detail" initialMaster="master">
+		<masterPages>
+			<Page id="master" title="Reports" backgroundDesign="List" class="sapUiStdPage" showNavButton="true" navButtonPress=".navButtonPress">
+				<List itemPress=".onListItemPress">
+					<StandardListItem title="{i18n>TravelTrends}" type="Navigation" custom:to="detail"/>
+					<StandardListItem title="{i18n>Ticketing}" type="Navigation" custom:to="detailTicketing"/>
+					<StandardListItem title="{i18n>Cargo}" type="Navigation" custom:to="detailCargo"/>
+				</List>
+			</Page>
+		</masterPages>
+		<detailPages>
+			<Page id="detail" title="{i18n>TravelTrends}" backgroundDesign="Solid" showNavButton="false" navButtonPress=".onPressDetailBack"
+				class="sapUiSizeCompact">
+				<customHeader>
+					<Bar>
+						<contentLeft>
+							<Button icon="sap-icon://menu2" press="onPressDetailBack"></Button>
+						</contentLeft>
+						<contentMiddle>
+							<Title text="{i18n>TravelTrends}"></Title>
+						</contentMiddle>
+						<contentRight>
+							<!--<Button text="chandeep" icon="sap-icon://navigation-down-arrow" press="onActionSheet"></Button>-->
+						</contentRight>
+					</Bar>
+				</customHeader>
+				<content>
+					<Panel id="idPanel">
+						<VBox class="BorderClass">
+							<f:SimpleForm editable="false" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4" labelSpanM="4" labelSpanS="12"
+								adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="3" columnsL="2" columnsM="2"
+								singleContainerFullSize="false">
+								<f:content>
+									<core:Title/>
+									<Label text="{i18n>Year}" design="Bold" class="sapUiSmallMarginRight"/>
+									<MultiComboBox id="idHerbpYear" placeholder="Year" items="{Year>/}">
+										<core:Item key="{Year>text}" text="{Year>text}"/>
+									</MultiComboBox>
+									<Label text="{i18n>Country}" design="Bold" class="sapUiSmallMarginRight"/>
+									<MultiComboBox id="idHrbpCountry" placeholder="Country" selectionChange="onCountryChange"
+										items="{ path: 'country>/CountryList', sorter: { path: 'text' } }">
+										<core:Item key="{country>MOLGA}" text="{country>LTEXT}"/>
+									</MultiComboBox>
+									<Label text="Model" labelFor="idRequesterStatus" design="Bold" class="sapUiSmallMarginRight"/>
+									<MultiComboBox id="idHrbpAsgType" placeholder="AssignMent Model" items="{Assignment>/}">
+										<core:Item key="{Assignment>Key}" text="{Assignment>AsgType}"/>
+									</MultiComboBox>
+									<core:Title/>
+									<Label text="PE location" design="Bold" class="sapUiSmallMarginRight"/>
+									<SegmentedButton selectedKey="No" id="idHrbpPELoc">
+										<items>
+											<SegmentedButtonItem text="NO" key="No" press="onPressPECountriesNo"/>
+											<SegmentedButtonItem text="Yes" key="Yes" press="onPressPECountriesYes"/>
+										</items>
+									</SegmentedButton>
+									<Label text="Location" design="Bold" class="sapUiSmallMarginRight"/>
+									<MultiComboBox id="idHrbpLoc" placeholder="Location" items="{location>/}">
+										<core:Item key="{location>MOLGA}" text="{location>BLAND}"/>
+									</MultiComboBox>
+									<Label text="Family Travels" design="Bold" class="sapUiSmallMarginRight"/>
+									<ComboBox placeholder="Select" id="idHrbpFamilySP">
+										<core:Item key="0" text="Select"/>
+										<core:Item key="1" text="Sponsored"/>
+										<core:Item key="2" text="Not Sponsored"/>
+									</ComboBox>
+								</f:content>
+							</f:SimpleForm>
+							<Toolbar class="toolbarClass">
+								<ToolbarSpacer/>
+								<Button id="idClearBtn" text="Clear" width="100px" type="Emphasized" press="handleClearSearchFilters"/>
+								<Button id="idSearchBtn" text="Search" width="100px" type="Accept" press="handleSearchButtonPress"/>
+							</Toolbar>
+						</VBox>
+					</Panel>
+					<VBox>
+						<layout:Splitter width="100%" height="100%">
+							<layout:contentAreas>
+								<comm:ChartContainer id="chartContainer" showFullScreen="true" showPersonalization="false" autoAdjustHeight="false"
+									personalizationPress="attachPersonalizationPress" contentChange="attachContentChange">
+									<comm:content>
+										<comm:ChartContainerContent icon="sap-icon://line-chart" title="Line Chart">
+											<comm:content>
+												<viz:Popover id="idPopOver1"></viz:Popover>
+												<viz:VizFrame id="idVizFrame1" selectData="selectData" uiConfig="{applicationSet:'fiori'}" vizType="column"
+													vizProperties="{title:{text:'Bar Chart'}}">
+													<viz:dataset>
+														<viz.data:FlattenedDataset data="{data>/items}">
+															<viz.data:dimensions>
+																<viz.data:DimensionDefinition name="Year" value="{data>Year}"/>
+															</viz.data:dimensions>
+															<viz.data:measures>
+																<viz.data:MeasureDefinition name="DEPU" value="{data>DEPU}"/>
+																<viz.data:MeasureDefinition name="INFO" value="{data>INFO}"/>
+																<viz.data:MeasureDefinition name="BUSR" value="{data>BUSR}"/>
+																<viz.data:MeasureDefinition name="SECO" value="{data>SECO}"/>
+															</viz.data:measures>
+														</viz.data:FlattenedDataset>
+													</viz:dataset>
+													<viz:feeds>
+														<viz.feeds:FeedItem id="valueAxisFeed1" uid="valueAxis" type="Measure" values="DEPU,INFO,BUSR,SECO"/>
+														<viz.feeds:FeedItem id="feedCategoryAxis" uid="categoryAxis" type="Dimension" values="Year"/>
+													</viz:feeds>
+												</viz:VizFrame>
+											</comm:content>
+										</comm:ChartContainerContent>
+										<comm:ChartContainerContent icon="sap-icon://table-view" title="Table">
+											<comm:content>
+												<Table inset="false" items="{data>/items}">
+													<headerToolbar>
+														<OverflowToolbar>
+															<content>
+																<Title text="Records" level="H2"/>
+																<ToolbarSpacer/>
+															</content>
+														</OverflowToolbar>
+													</headerToolbar>
+													<columns>
+														<Column demandPopin="true" minScreenWidth="Tablet">
+															<Text text="Year" />
+														</Column>
+														<Column demandPopin="true" minScreenWidth="Tablet">
+															<Text text="DEPU"/>
+														</Column>
+														<Column demandPopin="true" minScreenWidth="Tablet">
+															<Text text="BUSR"/>
+														</Column>
+														<Column demandPopin="true" minScreenWidth="Tablet">
+															<Text text="INFO"/>
+														</Column>
+														<Column demandPopin="true" minScreenWidth="Tablet">
+															<Text text="SECO"/>
+														</Column>
+														<Column demandPopin="true" minScreenWidth="Tablet">
+															<Text text="DEPU AvgDuration"/>
+														</Column>
+														<Column demandPopin="true" minScreenWidth="Tablet">
+															<Text text="BUSR AvgDuration"/>
+														</Column>
+														<Column demandPopin="true" minScreenWidth="Tablet">
+															<Text text="INFO AvgDuration"/>
+														</Column>
+														<Column demandPopin="true" >
+															<Text text="HOME AvgDuration"/>
+														</Column>
+													</columns>
+													<items>
+														<ColumnListItem>
+															<cells>
+																<ObjectIdentifier title="{data>Year}"/>
+																<ObjectIdentifier title="{data>DEPU}"/>
+																<ObjectIdentifier title="{data>BUSR}"/>
+																<ObjectIdentifier title="{data>INFO}"/>
+																<ObjectIdentifier title="{data>SECO}"/>
+																<ObjectIdentifier title="{data>DEPUAvgDuration}"/>
+																<ObjectIdentifier title="{data>BUSRAvgDuration}"/>
+																<ObjectIdentifier title="{data>INFOAvgDuration}"/>
+																<ObjectIdentifier title="{data>HOMEAvgDuration}"/>
+															</cells>
+														</ColumnListItem>
+													</items>
+												</Table>
+											</comm:content>
+										</comm:ChartContainerContent>
+									</comm:content>
+								</comm:ChartContainer>
+							</layout:contentAreas>
+						</layout:Splitter>
+						<layout:Splitter width="100%" height="100%">
+							<layout:contentAreas>
+								<comm:ChartContainer showFullScreen="true" showPersonalization="false" autoAdjustHeight="false"
+									personalizationPress="attachPersonalizationPress" contentChange="attachContentChange">
+									<comm:content>
+										<comm:ChartContainerContent icon="sap-icon://line-chart" title="Line Chart">
+											<comm:content>
+												<viz:Popover id="idPopOver3"></viz:Popover>
+												<!--stacked_combination-->
+												<viz:VizFrame id="idVizFrame3" selectData="selectData" uiConfig="{applicationSet:'fiori'}" vizType="combination"
+													vizProperties="{title:{text:'Combination Chart'}}">
+													<viz:dataset>
+														<viz.data:FlattenedDataset data="{data>/items}">
+															<viz.data:dimensions>
+																<viz.data:DimensionDefinition name="Year" value="{data>Year}"/>
+															</viz.data:dimensions>
+															<viz.data:measures>
+																<viz.data:MeasureDefinition name="SECO" value="{data>SECO}"></viz.data:MeasureDefinition >
+																<viz.data:MeasureDefinition name="DEPU" value="{data>DEPU}"/>
+																<viz.data:MeasureDefinition name="INFO" value="{data>INFO}"/>
+																<viz.data:MeasureDefinition name="BUSR" value="{data>BUSR}"/>
+																<viz.data:MeasureDefinition name="DEPUAvgDuration" value="{data>DEPUAvgDuration}"/>
+																<viz.data:MeasureDefinition name="BUSRAvgDuration" value="{data>BUSRAvgDuration}"/>
+																<viz.data:MeasureDefinition name="INFOAvgDuration" value="{data>INFOAvgDuration}"/>
+																<viz.data:MeasureDefinition name="HOMEAvgDuration" value="{data>HOMEAvgDuration}"/>
+															</viz.data:measures>
+														</viz.data:FlattenedDataset>
+													</viz:dataset>
+													<viz:feeds>
+														<viz.feeds:FeedItem id="valueAxisFeed3" uid="valueAxis" type="Measure" values="SECO,DEPU,INFO,BUSR"/>
+														<viz.feeds:FeedItem uid="categoryAxis" type="Dimension" values="Year"/>
+													</viz:feeds>
+												</viz:VizFrame>
+											</comm:content>
+										</comm:ChartContainerContent>
+									</comm:content>
+								</comm:ChartContainer>
+							</layout:contentAreas>
+						</layout:Splitter>
+					</VBox>
+				</content>
+			</Page>
+		</detailPages>
+	</SplitContainer>
+</mvc:View>

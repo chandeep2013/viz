@@ -1,0 +1,15 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<ActionSheet
+		title="Choose Your Action"
+		showCancelButton="true"
+		placement="Bottom">
+			<Button text="User Profile" icon="sap-icon://customer" press="onUserInfo" visible="false"/>
+			<Button id="idTicketingButton" text="Ticketing" icon="sap-icon://edit" press="onTicketing"/>
+			<Button id="idInsuranceButton" text="Create Insurane" icon="sap-icon://insurance-life" press="onCreateInsurance"/>
+			<Button id="idChangeDateButton" text="Change Date" icon="sap-icon://check-availability" press="onDateChange"/>
+			<Button id="idCancelButton" text="Cancel Request" icon="sap-icon://cancel" press="onCancelRequest"/>
+			<Button text="Travel Settlement" icon="sap-icon://travel-expense-report" press="NavBackToLogin" visible="false"/>
+	</ActionSheet>
+</core:FragmentDefinition>

@@ -1,0 +1,87 @@
+{
+	"items": [{
+		"Year": "2012",
+		"DEPU": "20",
+		"BUSR": "35",
+		"INFO": "15",
+		"SECO":"45",
+		"DEPUAvgDuration":"60",
+		"BUSRAvgDuration":"95",
+		"INFOAvgDuration":"70",
+		"HOMEAvgDuration":"80"
+    },
+    {
+		"Year": "2013",
+		"DEPU": "30",
+		"BUSR": "20",
+		"INFO": "10",
+		"SECO":"40",
+		"DEPUAvgDuration":"80",
+		"BUSRAvgDuration":"125",
+		"INFOAvgDuration":"50",
+		"HOMEAvgDuration":"75"
+	}, {
+		"Year": "2014",
+		"DEPU": "35",
+		"BUSR": "25",
+		"INFO": "15",
+		"SECO":"35",
+		"DEPUAvgDuration":"60",
+		"BUSRAvgDuration":"95",
+		"INFOAvgDuration":"100",
+		"HOMEAvgDuration":"65"
+	}, {
+		"Year": "2015",
+		"DEPU": "60",
+		"BUSR": "40",
+		"INFO": "20",
+		"SECO":"55",
+		"DEPUAvgDuration":"100",
+		"BUSRAvgDuration":"75",
+		"INFOAvgDuration":"110",
+		"HOMEAvgDuration":"95"
+	}, {
+		"Year": "2016",
+		"DEPU": "70",
+		"BUSR": "30",
+		"INFO": "40",
+		"SECO":"45",
+		"DEPUAvgDuration":"80",
+		"BUSRAvgDuration":"95",
+		"INFOAvgDuration":"100",
+		"HOMEAvgDuration":"65"
+	}, {
+		"Year": "2017",
+		"DEPU": "45",
+		"BUSR": "25",
+		"INFO": "15",
+		"SECO":"35",
+		"DEPUAvgDuration":"50",
+		"BUSRAvgDuration":"75",
+		"INFOAvgDuration":"90",
+		"HOMEAvgDuration":"85"
+    },
+    {
+		"Year": "2018",
+		"DEPU": "50",
+		"BUSR": "25",
+		"INFO": "35",
+		"SECO":"55",
+		"DEPUAvgDuration":"70",
+		"BUSRAvgDuration":"75",
+		"INFOAvgDuration":"55",
+		"HOMEAvgDuration":"85"
+    },
+    {
+		"Year": "2019",
+		"DEPU": "70",
+		"BUSR": "15",
+		"INFO": "25",
+		"SECO":"35",
+		"DEPUAvgDuration":"80",
+		"BUSRAvgDuration":"85",
+		"INFOAvgDuration":"90",
+		"HOMEAvgDuration":"105"
+	}]
+}
+

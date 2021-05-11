@@ -1,0 +1,45 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<Dialog title="PRIMARY INFORMATION" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form" class="sapUiSizeCompact"
+		busy="{products>/dialogBusy}">
+		<VBox class="sapUiSmallMargin">
+			<f:SimpleForm editable="false" layout="ResponsiveGridLayout" labelSpanXL="3" labelSpanL="3" labelSpanM="3" labelSpanS="12"
+				adjustLabelSpan="false" emptySpanXL="4" emptySpanL="4" emptySpanM="4" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1"
+				singleContainerFullSize="false">
+				<f:content>
+					<Label text="From Date"/>
+					<DatePicker placeholder="From Date" id="idFromDateC" value="{global>/screenData/ZZ_DEP_STDATE}" displayFormat="dd/MM/yyyy"
+						valueFormat="yyyyMMdd" valueState="{global>/screenData/ZZ_DEP_STDATE_ERROR}"/>
+					<Label text="To Date"/>
+					<DatePicker placeholder="To Date" id="idToDateC" value="{global>/screenData/ZZ_DEP_ENDATE}" displayFormat="dd/MM/yyyy"
+						valueFormat="yyyyMMdd" valueState="{global>/screenData/ZZ_DEP_ENDATE_ERROR}"/>
+					<Label text="From Country"/>
+					<ComboBox change="onCountryFromChange" selectedKey="{global>/screenData/ZZ_DEP_FRCNTRY}"
+						items="{ path: 'global>/country', sorter: { path: 'text' } }">
+						<core:Item key="{global>MOLGA}" text="{global>LTEXT}"/>
+					</ComboBox>
+					<Label text="From Location"/>
+					<ComboBox id="idFromLocationC" change="onLocationChange" enabled="{enabled}" items="{ path: 'global>/cityfrom'}"
+						selectedKey="{global>/screenData/ZZ_DEP_FRMLOC}" valueState="{global>/screenData/ZZ_DEP_FRMLOC_ERROR}">
+						<core:Item key="{global>MOLGA}" text="{global>BLAND}"/>
+					</ComboBox>
+					<Label text="To Country"/>
+					<ComboBox change="onCountryToChange" selectedKey="{global>/screenData/ZZ_DEP_TOCNTRY}"
+						items="{ path: 'global>/country', sorter: { path: 'text' } }">
+						<core:Item key="{global>MOLGA}" text="{global>LTEXT}"/>
+					</ComboBox>
+					<Label text="To Location"/>
+					<ComboBox id="idToLocationC" change="onLocationChange" tooltip="Enter Work location in case of work permit" enabled="{enabled}"
+						items="{ path: 'global>/cityto'}" selectedKey="{global>/screenData/ZZ_DEP_TOLOC}" valueState="{global>/screenData/ZZ_DEP_TOLOC_ERROR}">
+						<core:Item key="{global>MOLGA}" text="{global>BLAND}"/>
+					</ComboBox>
+				</f:content>
+			</f:SimpleForm>
+		</VBox>
+		<beginButton>
+			<Button text="Cancel" type="Reject" press="onCancelCreate"/>
+		</beginButton>
+		<endButton >
+			<Button text="Proceed" type="Accept" press="onPressProceed"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

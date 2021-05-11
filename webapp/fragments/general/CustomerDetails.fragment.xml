@@ -1,0 +1,17 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+    <Dialog  title="Customer Details" class="sapUiSizeCompact">
+        <VBox><!--id="idMCRResourceList" -->
+            <List items="{path:'detail>/customer',templateShareable:true}">
+                <headerToolbar>
+                    <OverflowToolbar>
+                        <SearchField  width="97%" class="SearchBottomClass" placeholder="Resource" search="OnSearchCustomer" liveChange="OnSearchCustomer"></SearchField>
+                    </OverflowToolbar>
+                </headerToolbar>
+                <StandardListItem type="Active" press="_handleValueHelpClose_Customer" title="{detail>NAME1}"  description="{detail>ORT01}" info="{detail>PSTLZ}"/>
+            </List>
+        </VBox>
+        <endButton>
+        	<Button text="Close" press="_handleValueHelpClose_CustomerClose"/>
+        </endButton>
+    </Dialog>
+</core:FragmentDefinition>

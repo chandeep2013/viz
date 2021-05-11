@@ -1,0 +1,14 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<Dialog title="Cancel Request" class="sapUiSizeCompact">
+		<VBox class="sapUiSmallMargin">
+			<Label text="Confirm your Cancellation" design="Bold"></Label>
+			<TextArea id="txtCancelRequestComment" class="cancelComments" placeholder="Comments" width="96%"></TextArea>
+		</VBox>
+		<beginButton>
+			<Button text="Cancel" type="Reject" press="onCloseCancelPopUp"/>
+		</beginButton>
+		<endButton >
+			<Button text="Submit Request" type="Accept" press="onSubmitCancelRequest"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

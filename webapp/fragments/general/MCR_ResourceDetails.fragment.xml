@@ -1,0 +1,17 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+    <Dialog  title="Task Details" class="sapUiSizeCompact">
+        <VBox>
+            <List id="idMCRResourceList" items="{path:'detail>/MCR',templateShareable:true}">
+                <headerToolbar>
+                    <OverflowToolbar>
+                        <SearchField id="idSearchMCRResource" width="96%" class="SearchBottomClass" placeholder="Resource" search="OnSearchMCRResource" liveChange="OnSearchMCRResource"></SearchField>
+                    </OverflowToolbar>
+                </headerToolbar>
+                <StandardListItem type="Active" press="_handleValueHelpClose_MCRResource" title="{detail>ResourceId}"  description="{detail>ResoucesDesc}" info="{detail>ResourceTyp}"/>
+            </List>
+        </VBox>
+        <endButton>
+        	<Button text="Close" press="Close_MCRResource"/>
+        </endButton>
+    </Dialog>
+</core:FragmentDefinition>

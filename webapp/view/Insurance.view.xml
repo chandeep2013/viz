@@ -1,0 +1,223 @@
+<mvc:View xmlns="sap.uxap" xmlns:m="sap.m" xmlns:f="sap.f" xmlns:form="sap.ui.layout.form" xmlns:mvc="sap.ui.core.mvc"
+	xmlns:l="sap.ui.layout" xmlns:core="sap.ui.core" controllerName="com.bosch.hr.swift_trv.controller.Insurance"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	<m:App>
+		<m:pages>
+			<m:Page showHeader="false">
+				<m:content>
+					<ObjectPageLayout id="ObjectPageLayout" showTitleInHeaderContent="true" alwaysShowContentHeader="false" preserveHeaderStateOnScroll="false"
+						headerContentPinnable="true" isChildPage="true" upperCaseAnchorBar="false" class="sapUiSizeCompact">
+						<headerTitle>
+							<ObjectPageDynamicHeaderTitle>
+								<expandedHeading>
+									<m:Title text="{i18n>Insurance} - {new>/ZZ_REINR}" wrapping="true" class="sapUiSmallMarginEnd"/>
+								</expandedHeading>
+								<snappedHeading>
+									<m:FlexBox wrap="Wrap" fitContainer="true" alignItems="Center">
+										<m:FlexBox wrap="NoWrap" fitContainer="true" alignItems="Center" class="sapUiTinyMarginEnd">
+											<f:Avatar src="sap-icon://image-viewer" displaySize="S" displayShape="Square" class="sapUiTinyMarginEnd"/>
+											<m:Title text="{i18n>Insurance}" wrapping="true"/>
+										</m:FlexBox>
+									</m:FlexBox>
+								</snappedHeading>
+								<navigationActions>
+									<m:OverflowToolbarButton type="Transparent" icon="sap-icon://full-screen" press=".handleFullScreen" tooltip="Enter Full Screen Mode"
+										visible="{= ${/actionButtonsInfo/midColumn/fullScreen} !== null }"/>
+									<m:OverflowToolbarButton type="Transparent" icon="sap-icon://exit-full-screen" press=".handleExitFullScreen" tooltip="Exit Full Screen Mode"
+										visible="{= ${/actionButtonsInfo/midColumn/exitFullScreen} !== null }"/>
+									<m:OverflowToolbarButton type="Transparent" icon="sap-icon://decline" press=".handleClose" tooltip="Close column"
+										visible="{= ${/actionButtonsInfo/midColumn/closeColumn} !== null }"/>
+								</navigationActions>
+								<!--<actions>
+									<m:ToggleButton text="{i18n>Comments}" type="Emphasized" press="onComnetButtonPress"/>
+									<m:ToggleButton text="{i18n>Edit}" type="Emphasized" press=".onEditToggleButtonPress"/>
+								</actions>-->
+							</ObjectPageDynamicHeaderTitle>
+						</headerTitle>
+						<headerContent>
+							<m:FlexBox wrap="Wrap" fitContainer="true" alignItems="Stretch">
+								<f:Avatar src="sap-icon://image-viewer" displaySize="L" displayShape="Square" class="sapUiTinyMarginEnd"></f:Avatar>
+								<m:VBox justifyContent="Center" class="sapUiSmallMarginEnd">
+									<m:Label text="{i18n>User}" design="Bold"/>
+									<m:Text text="{parts: [ {path: 'new>/ZZ_DEP_NAME'} ], formatter: '.formatter.pendingWithInsurance'}"/>
+								</m:VBox>
+								<m:VBox justifyContent="Center" class="sapUiSmallMarginEnd">
+									<m:Label text="{i18n>EmailId}" design="Bold"/>
+									<m:Text text="{new>/ZZ_DEP_EMAIL}"/>
+								</m:VBox>
+								<m:VBox justifyContent="Center" class="sapUiSmallMarginEnd">
+									<m:Label text="{i18n>Travelplan}" design="Bold"/>
+									<m:Text text="{new>/ZZ_REINR}"/>
+								</m:VBox>
+								<!--<m:VBox justifyContent="Center" class="sapUiSmallMarginEnd">
+									<m:Label text="{i18n>Status}" design="Bold"/>
+									<m:ObjectNumber state="Success" number=""/>
+								</m:VBox>-->
+							</m:FlexBox>
+						</headerContent>
+						<sections>
+							<ObjectPageSection title="{i18n>General}" titleUppercase="false">
+								<subSections>
+									<ObjectPageSubSection>
+										<blocks>
+											<m:VBox class="sapUiSmallMargin">
+												<form:SimpleForm editable="false" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4" labelSpanM="4" labelSpanS="4"
+													adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="3" columnsL="2" columnsM="2"
+													singleContainerFullSize="false">
+													<form:content>
+														<core:Title/>
+														<m:Label text="{i18n>EmployeeName}" design="Bold"/>
+														<m:Text text="{parts: [ {path: 'new>/ZZ_DEP_NAME'} ], formatter: '.formatter.pendingWithInsurance'}"/>
+														<m:Label text="{i18n>EmployeeNo}" design="Bold"/>
+														<m:Text text="{new>/ZZ_DEP_PERNR}"/>
+														<m:Label text="{i18n>EmailId}" design="Bold"/>
+														<m:Text text="{new>/ZZ_DEP_EMAIL}"/>
+														<m:Label text="{i18n>PassPort}" design="Bold"/>
+														<m:Text text="{new>/ZZ_PASSPORT_NO}"/>
+														<m:Label text="{i18n>FromCnty}" design="Bold"/>
+														<m:Text text="{new>/ZZ_FMCNTRY}"/>
+														<core:Title/>
+														<m:Label text="{i18n>AssignmentModel}" design="Bold"/>
+														<m:Text text="{new>/ZE2E_INS_HDR/ZZ_ASG_TYP}"/>
+														<m:Label text="{i18n>TravelPlanNo}" design="Bold"/>
+														<m:Text text="{new>/ZZ_REINR}"/>
+														<m:Label text="{i18n>StartTo}" design="Bold"/>
+														<m:Text
+															text="{parts: [ {path: 'new>/ZZ_DATB1'} ], formatter: '.formatter.onDateFormat'} - {parts: [ {path: 'new>/ZZ_DATV1'} ], formatter: '.formatter.onDateFormat'}"/>
+														<m:Label text="{i18n>DurationDays}" design="Bold"/>
+														<m:Text text="{new>/ZZ_ZDURN}"/>
+														<m:Label text="{i18n>ToCnty}" design="Bold"/>
+														<m:Text text="{new>/ZZ_LAND1}"/>
+													</form:content>
+												</form:SimpleForm>
+											</m:VBox>
+										</blocks>
+									</ObjectPageSubSection>
+								</subSections>
+							</ObjectPageSection>
+							<ObjectPageSection title="{i18n>RequestDetails}" titleUppercase="false">
+								<subSections>
+									<ObjectPageSubSection>
+										<blocks>
+											<m:VBox>
+												<m:IconTabBar id="iconTabBarId">
+													<m:items>
+														<m:IconTabFilter icon="sap-icon://hint" key="Hint">
+															<m:VBox class="sapUiSmallMargin">
+																<form:SimpleForm editable="false" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4" labelSpanM="4" labelSpanS="4"
+																	adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="3" columnsL="2" columnsM="2"
+																	singleContainerFullSize="false">
+																	<form:content>
+																		<core:Title/>
+																		<m:Label text="{i18n>MedicalAmount}" design="Bold"/>
+																		<m:Text text="{new>/ZE2E_INS_HDR/ZZ_DAY_AMOUNT} {new>/ZE2E_INS_HDR/ZZ_DAY_CURR}"/>
+																		<m:Label text="{i18n>NonMedicalAmount}" design="Bold"/>
+																		<m:Text text="{new>/ZE2E_INS_HDR/ZZ_INS_AMOUNT} {new>/ZE2E_INS_HDR/ZZ_INS_CURR}"/>
+																		<core:Title/>
+																		<m:Label text="{i18n>PersonalEmail}" design="Bold"/>
+																		<m:Input value="{new>/ZZ_DEP_EMAIL}" editable="{products&gt;/editable}"/>
+																		<m:Label text="{i18n>Endorsement}" design="Bold" visible="false"/>
+																		<m:Input visible="false" value="{parts: [{path: 'new>/ZE2E_INS_HDR/ZE2E_REQ_STATUS/ZZ_REASON'} ], formatter: '.formatter.getEndorsement'}"
+																			editable="{products>/editable}"/>
+																		<m:Label text="{i18n>FamilyStatus}" design="Bold" visible="false"/>
+																		<m:Input visible="false" value="{parts: [{path: 'new>/ZE2E_INS_HDR/ZZ_CLEVEL'} ], formatter: '.formatter.getInsuranceFamilyStatus'}"
+																			editable="{products>/editable}"/>
+																	</form:content>
+																</form:SimpleForm>
+															</m:VBox>
+															<m:VBox>
+																<m:Table id="idTravellingTable" items="{traveller>/}">
+																	<m:infoToolbar>
+																		<m:OverflowToolbar>
+																			<m:Label text="{i18n>Travellingmember} * Travelling member's name must be as per passport"/>
+																		</m:OverflowToolbar>
+																	</m:infoToolbar>
+																	<m:columns>
+																		<m:Column id="idTravellingColumn">
+																			<m:Label text="{i18n>Traveller}" design="Bold"/>
+																		</m:Column>
+																		<m:Column minScreenWidth="Tablet" demandPopin="true">
+																			<m:Label text="{i18n>Name}" design="Bold"/>
+																		</m:Column>
+																		<m:Column minScreenWidth="Tablet" demandPopin="true">
+																			<m:Label text="{i18n>Relation}" design="Bold"/>
+																		</m:Column>
+																		<m:Column minScreenWidth="Tablet" demandPopin="true">
+																			<m:Label text="{i18n>VisaType}" design="Bold"/>
+																		</m:Column>
+																		<m:Column minScreenWidth="Tablet" demandPopin="true">
+																			<m:Label text="{i18n>Payment}" design="Bold"/>
+																		</m:Column>
+																		<m:Column minScreenWidth="Tablet" demandPopin="true">
+																			<m:Label text="{i18n>InsNo}" design="Bold" required="true"/>
+																		</m:Column>
+																		<m:Column minScreenWidth="Tablet" demandPopin="true">
+																			<m:Label text="{i18n>DOB}" design="Bold"/>
+																		</m:Column>
+																		<m:Column minScreenWidth="Tablet" demandPopin="true">
+																			<m:Label text="{i18n>Passport}" design="Bold" required="true"/>
+																		</m:Column>
+																	</m:columns>
+																	<m:items>
+																		<m:ColumnListItem>
+																			<m:cells>
+																				<m:Text text=""/>
+																				<m:Text text="{traveller>ZZ_DEP_NAME}"/>
+																				<m:Text text="{parts: [{path: 'traveller>ZZ_DEPNDT_TYP'} ], formatter: '.formatter.TravellerName'}"/>
+																				<m:Text text="{traveller>ZZ_VISA_TYPE}"/>
+																				<m:Text text="{traveller>ZZ_PAY_TYP}"/>
+																				<m:Text text="{traveller>ZZ_INS_NO}"/>
+																				<m:Text text="{parts: [ {path: 'traveller>ZZ_DOB'} ], formatter: '.formatter.onDateFormat'}"/>
+																				<m:Text text="{traveller>ZZ_PASSPORT}"/>
+																			</m:cells>
+																		</m:ColumnListItem>
+																	</m:items>
+																</m:Table>
+															</m:VBox>
+															<m:VBox>
+																<core:Fragment fragmentName="com.bosch.hr.swift_trv.fragments.insurance.Questionnaire" type="XML"/>
+															</m:VBox>
+														</m:IconTabFilter>
+														<m:IconTabFilter icon="sap-icon://attachment" key="Attachmemt">
+															<core:Fragment fragmentName="com.bosch.hr.swift_trv.fragments.common.UploadCollection" type="XML"/>
+														</m:IconTabFilter>
+														<m:IconTabFilter icon="sap-icon://comment" key="Comment">
+															<m:List showSeparators="Inner" items="{Comments>/}">
+																<m:FeedListItem sender="{Comments>ZZ_NT_ID}"
+																	timestamp="{ parts: [{path: 'Comments>ZZ_CTIMESTAMP'} ], formatter: '.formatter.formatInsuranceCommentsDate' }" text="{Comments>ZZ_COMMENTS}"/>
+															</m:List>
+														</m:IconTabFilter>
+														<m:IconTabFilter icon="sap-icon://accept" key="Confirm">
+															<m:Panel headerText="{i18n>declaration}" expandable="true" expanded="true">
+																<m:Text text="{i18n>InsuranceCover}"></m:Text>
+																<m:Text text="{i18n>InsuranceCoverage}"></m:Text>
+																<m:Text text="{i18n>InsuranceCoverageApplicable}"></m:Text>
+															</m:Panel>
+															<m:Panel headerText="{i18n>Acknowledgement}" expandable="true" expanded="true">
+																<m:CheckBox id="confirmCheckboxId" editable="{ path: 'global>/action', formatter: '.formatter.editableEmployee'}"
+																	selected="{ path: 'global>/action', formatter: '.formatter.setAcknowledgementCheck' }"/>
+																<m:Text text=" {i18n>Statement}" class="magintopText"></m:Text>
+															</m:Panel>
+														</m:IconTabFilter>
+													</m:items>
+												</m:IconTabBar>
+											</m:VBox>
+										</blocks>
+									</ObjectPageSubSection>
+								</subSections>
+							</ObjectPageSection>
+						</sections>
+						<footer>
+							<m:OverflowToolbar>
+								<m:ToolbarSpacer/>
+								<m:Button id="btnSave" type="Accept" text="{i18n>Save}" press="onSaveInsurance"/>
+								<m:Button id="btnNext" text="{i18n>Next}" type="Transparent" press="onNextPress" visible="true"/>
+								<m:Button id="btnSubmit" type="Accept" text="{i18n>Submit}" press="onSubmitPress" visible="false"/>
+							</m:OverflowToolbar>
+						</footer>
+					</ObjectPageLayout>
+				</m:content>
+			</m:Page>
+		</m:pages>
+	</m:App>
+</mvc:View>

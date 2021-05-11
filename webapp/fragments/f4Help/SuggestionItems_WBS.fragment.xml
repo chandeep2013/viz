@@ -1,0 +1,27 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<Dialog title="WBS Element" class="sapUiSizeCompact" afterClose="onAfterCloseF4Help">
+		<HeaderContainer>
+			<Text text=""></Text>
+			<!--placeholder="WBS"-->
+			<SearchField id="idSearchWBS" search="OnSearchWBS" liveChange="OnSearchWBS" width="12rem"></SearchField>
+			<MenuButton icon="sap-icon://sort">
+				<menu>
+					<Menu >
+						<MenuItem text="Ascending" press="onSortWBS"/>
+						<MenuItem text="Descending" press="onSortWBS"/>
+					</Menu>
+				</menu>
+			</MenuButton>
+		</HeaderContainer>
+		<VBox>
+			<List id="idListWBS" items="{path:'detail>/WBSF4Help',templateShareable:true}" enableBusyIndicator="true" busyIndicatorDelay="1"
+				growing="true" growingThreshold="20" growingScrollToLoad="true">
+				<StandardListItem type="Active" press="_handleValueHelpClose_wbs" title="{detail>ZZ_POSKI}" description="{detail>ZZ_POST1}"/>
+			</List>
+			<!-- info="{detail&gt;info}" -->
+		</VBox>
+		<endButton>
+			<Button text="Cancel" type="Reject" press="onWBSCancel"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

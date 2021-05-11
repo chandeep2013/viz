@@ -1,0 +1,48 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:file="sap.ui.unified">
+	<Dialog title="Visa Details" xmlns:l="sap.ui.layout" xmlns:form="sap.ui.layout.form" class="sapUiSizeCompact">
+		<VBox class="sapUiSmallMargin">
+			<form:SimpleForm editable="false" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4" labelSpanM="4" labelSpanS="12"
+				adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="3" columnsL="2" columnsM="2"
+				singleContainerFullSize="false">
+				<form:content>
+					<core:Title/>
+					<Label text="{i18n>From}" design="Bold" required="true" visible="{parts: [ {path: 'detail>/view/visaExist'} ], formatter: '.formatter.onVisibleVisaItems'}"/>
+					<DatePicker displayFormat="dd/MM/yyyy" valueFormat="yyyyMMdd" placeholder="Visa valid from" value="{products>/ZZ_VISA_SDATE}"
+						visible="{parts: [ {path: 'detail>/view/visaExist'} ], formatter: '.formatter.onVisibleVisaItems'}" editable="{products>/editable}"/>
+					<Label text="{i18n>To}" design="Bold" required="true" visible="{parts: [ {path: 'detail>/view/visaExist'} ], formatter: '.formatter.onVisibleVisaItems'}"/>
+					<DatePicker displayFormat="dd/MM/yyyy" valueFormat="yyyyMMdd" placeholder="Visa valid To" value="{products>/ZZ_VISA_EDATE}"
+						visible="{parts: [ {path: 'detail>/view/visaExist'} ], formatter: '.formatter.onVisibleVisaItems'}" editable="{products>/editable}"/>
+					<Label text="{i18n>VisaNo}" design="Bold" required="true"
+						visible="{parts: [ {path: 'detail>/view/visaExist'} ], formatter: '.formatter.onVisibleVisaItems'}"/>
+					<Input placeholder="Visa No" value="{products>/ZZ_VISA_NO}"
+						visible="{parts: [ {path: 'detail>/view/visaExist'} ], formatter: '.formatter.onVisibleVisaItems'}" editable="{products>/editable}"/>
+					<Label text="{i18n>VisaType}" design="Bold" required="true"
+						visible="{parts: [ {path: 'detail>/view/visaExist'} ], formatter: '.formatter.onVisibleVisaItems'}"/>
+					<Select selectedKey="{products>/ZZ_CURR_VISA_TYP}"
+						visible="{parts: [ {path: 'detail>/view/visaExist'} ], formatter: '.formatter.onVisibleVisaItems'}" enabled="{products>/editable}">
+						<core:Item key="BUSR" text="Business Visa"/>
+						<core:Item key="TRNG" text="Training Visa"/>
+						<core:Item key="WRKP" text="Work Permit"/>
+					</Select>
+					<Label text="" visible="{parts: [ {path: 'detail>/view/visaExist'} ], formatter: '.formatter.onVisibleVisaItems'}"></Label>
+					<CheckBox text="Multi-Entry" editable="{products>/editable}"/>
+					<Label></Label>
+					<!--id="UploadVisaSelf" enabled="{products>/selfVisa/enabledUpload}"-->
+					<HBox visible="{parts: [ {path: 'detail>/view/visaExist'} ], formatter: '.formatter.onVisibleVisaItems'}">
+						<file:FileUploader  id="UploadVisaSelf"  maximumFileSize="5" fileSizeExceed="onFileSizeExceed"
+							fileAllowed="onFileAllowed" change="onFileChange" typeMissmatch="onTypeMissmatch" buttonOnly="true" buttonText="Upload"
+							visible="{parts: [ {path: 'detail>/view/visaExist'} ], formatter: '.formatter.onVisibleVisaItems'}" enabled="{products>/editable}"></file:FileUploader>
+						<Link text="Open File" href="{products>/href}" target="_blank"
+							visible="{parts: [ {path: 'detail>/view/visaExist'} ], formatter: '.formatter.onVisibleVisaItems'}"></Link>
+					</HBox>
+				</form:content>
+			</form:SimpleForm>
+		</VBox>
+		<beginButton>
+			<Button text="Close" type="Reject" press="onCancelVisaDetails"/>
+		</beginButton>
+		<!--<endButton >
+			<Button text="Ok" type="Accept" press="onCancelVisaDetails"/>
+		</endButton>-->
+	</Dialog>
+</core:FragmentDefinition>

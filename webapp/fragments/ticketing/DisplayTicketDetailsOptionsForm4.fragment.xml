@@ -1,0 +1,27 @@
+<core:FragmentDefinition xmlns:m="sap.m" xmlns="sap.ui.layout" xmlns:form="sap.ui.layout.form" xmlns:core="sap.ui.core">
+	<m:VBox class="sapUiSmallMargin">
+		<form:SimpleForm editable="false" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4" labelSpanM="4" labelSpanS="4"
+			adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="3" columnsL="2" columnsM="2"
+			singleContainerFullSize="false">
+			<form:content>
+				<core:Title/>
+				<m:Label text="Request Approval" design="Bold"/>
+				<m:Switch id="switch" customTextOn="Yes" customTextOff="No" enabled="{properties>/swteditable}"/>
+				<m:Label text="{i18n>Desc}" design="Bold"/>
+				<m:Text id="txtarea4" text="{itenary4>/collection4/Optiontxt}"/>
+				<m:Label text="{i18n>TotalFare}" design="Bold"/>
+				<m:Text id="t14" text="{itenary4>/collection4/Tfare}"/>
+				<core:Title/>
+				<m:Label text="{i18n>SpecialNotes}" design="Bold"/>
+				<m:Text id="t16" text="{itenary4>/collection4/Spnotes}"/>
+				<m:Label text="{i18n>Charges}" design="Bold"/>
+				<m:Text id="ch4" text="{ parts: [{path: 'itenary4>/collection4/AddCharge'} ], formatter: '.formatter.ChargeText' }"/>
+				<m:Label text="{i18n>Amount}" design="Bold"/>
+				<m:Text id="ch4Value" text="{itenary4>/collection4/AChargeAmt}"/>
+				<m:Label text="Recovery Amount" design="Bold"/>
+				<m:Text id="t17" text="{ parts: [{path: 'ticketModel>/RecoveryAmt'} ], formatter: '.formatter.onWBSElement' }"></m:Text>
+				<m:Text text="INR"></m:Text>
+			</form:content>
+		</form:SimpleForm>
+	</m:VBox>
+</core:FragmentDefinition>

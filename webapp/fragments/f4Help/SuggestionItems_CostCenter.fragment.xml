@@ -1,0 +1,27 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<Dialog title="Cost Center" class="sapUiSizeCompact" afterClose="onAfterCloseF4Help">
+		<HeaderContainer>
+			<Text text=""></Text>
+			<!--placeholder="Cost Center"-->
+			<SearchField id="idSearchCostCenter" search="OnSearchCostCenter" liveChange="OnSearchCostCenter" width="12rem"></SearchField>
+			<MenuButton icon="sap-icon://sort">
+				<menu>
+					<Menu >
+						<MenuItem text="Ascending" press="onSortCostCenter"/>
+						<MenuItem text="Descending" press="onSortCostCenter"/>
+					</Menu>
+				</menu>
+			</MenuButton>
+		</HeaderContainer>
+		<VBox>
+			<List id="idListCostCenter" items="{path:'detail>/CostCenterF4Help',templateShareable:true}" enableBusyIndicator="true"
+				busyIndicatorDelay="1" growing="true" growingThreshold="20" growingScrollToLoad="true">
+				<StandardListItem type="Active" press="_handleValueHelpClose_cost" title="{detail>KOSTL}" description="{detail>KTEXT}" info="{detail>VERAK}"/>
+			</List>
+			<!-- info="{detail&gt;info}" -->
+		</VBox>
+		<endButton>
+			<Button text="Cancel" type="Reject" press="onCostCenterCancel"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

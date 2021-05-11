@@ -1,0 +1,38 @@
+<core:FragmentDefinition xmlns:m="sap.m" xmlns="sap.ui.layout" xmlns:form="sap.ui.layout.form" xmlns:core="sap.ui.core">
+	<m:VBox class="sapUiSmallMargin">
+		<form:SimpleForm editable="false" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4" labelSpanM="4" labelSpanS="4"
+			adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="3" columnsL="2" columnsM="2"
+			singleContainerFullSize="false">
+			<form:content>
+				<core:Title/>
+				<m:Label text="{i18n>FromCountry}" design="Bold"/>
+				<m:Text text="{ticketModel>/FromCountryText}"/>
+				<m:Label text="{i18n>FromDate}" design="Bold"/>
+				<m:Text text="{parts: [ {path: 'ticketModel>/StartDate'} ], formatter: '.formatter.onDateFormat'}"/>
+				<m:Label text="{i18n>ContactNo}" design="Bold"/>
+				<m:Text text="{parts: [{path: 'ticketModel>/ContactNo'} ], formatter: '.formatter.onWBSElement' }"/>
+				<m:Label text="{i18n>MealPreference}" design="Bold"/>
+				<m:Text text="{ticketModel>/Meal}"/>
+				<m:Label text="{i18n>SeatPreference}" design="Bold"/>
+				<m:Text text="{parts: [{path: 'ticketModel>/Seat'} ], formatter: '.formatter.onWBSElement'}"/>
+				<core:Title/>
+				<m:Label text="{i18n>ToCountry}" design="Bold"/>
+				<m:Text text="{ticketModel>/ToCountryText}"/>
+				<m:Label text="{i18n>EndDate}" design="Bold"/>
+				<m:Text text="{parts: [ {path: 'ticketModel>/EndDate'} ], formatter: '.formatter.onDateFormat'}"/>
+				<m:Label text="{i18n>DestinationContactNo}" design="Bold"/>
+				<m:Text text="-"/>
+				<m:Label text="{i18n>PersonalMailId}" design="Bold"/>
+				<m:Text text="{ parts: [{path: 'ticketModel>/PersonalEmailId'} ], formatter: '.formatter.onWBSElement' }"/>
+				<!--<m:Label text="Frequent Flyer No." design="Bold"/>
+				<m:Text text="Test"/>-->
+				<m:Label text="{i18n>VisaType}" design="Bold"/>
+				<m:Text text="{ parts: [{path: 'ticketModel>/VisaType'} ], formatter: '.formatter.onWBSElement' }"/>
+			</form:content>
+		</form:SimpleForm>
+		<!--<m:Panel headerText="{i18n>TravelPlanPdf}" expanded="false" expandable="true" expand="onExpandPdf">
+			<core:HTML id="html1"></core:HTML> id="panel_html"
+		</m:Panel>-->
+		<m:Button icon="sap-icon://arrow-bottom" text="{i18n>TravelPlanPdf}" press="onExpandPdf" type="Emphasized"></m:Button>
+	</m:VBox>
+</core:FragmentDefinition>

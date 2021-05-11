@@ -1,0 +1,16 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:l="sap.ui.layout"
+	xmlns:u="sap.ui.unified"
+	xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core">
+	<UploadCollection id="UploadCollection"
+		maximumFilenameLength="55" multiple="true" uploadUrl=""
+		showSeparators="None" change="onFileUpload" fileDeleted="onFileDeleted"
+		fileRenamed="onFileRenamed" fileSizeExceed="onFileSizeExceed"
+		typeMissmatch="onTypeMissmatch" uploadComplete="onUploadComplete"
+		class="uploadCollectionClass margin_top_10"
+		items="{new>/Files}">
+		<UploadCollectionItem fileName="{new>FileName}"
+			mimeType="{parts: [{path: 'new>FileName'} ], formatter: '.formatter.getFileType'}"
+			url="{new>FileUrl}" visibleEdit="false" visibleDelete="true"
+			thumbnailUrl="" />
+	</UploadCollection>
+</core:FragmentDefinition>

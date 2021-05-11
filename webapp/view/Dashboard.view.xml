@@ -1,0 +1,33 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="com.bosch.hr.swift_trv.controller.Dashboard"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	<App >
+		<pages>
+			<Page title="{i18n>Dashboard}" class="sapUiSizeCompact BackgroundColorClass">
+				<customHeader>
+					<Bar>
+						<contentMiddle >
+							<Title text="{i18n>Dashboard}"></Title>
+						</contentMiddle>
+						<contentRight >
+							<Button text="{i18n>UserName}" press="onActionSheet" visible="false"></Button>
+						</contentRight>
+					</Bar>
+				</customHeader>
+				<content>
+					<GenericTile header="{i18n>MyRequests}" class="sapUiTinyMarginBegin sapUiTinyMarginTop borderRadius" headerImage="sap-icon://write-new"
+						press="onPressMyRequests" tooltip="{i18n>MyRequests}">
+						<tileContent>
+							<TileContent footer="{i18n>Requests}"></TileContent>
+						</tileContent>
+					</GenericTile>
+					<GenericTile header="{i18n>Reports}" class="sapUiTinyMarginBegin sapUiTinyMarginTop borderRadius" headerImage="sap-icon://bar-chart"
+						press="onPressReports" tooltip="{i18n>Reports}">
+						<tileContent>
+							<TileContent footer="{i18n>Reports}"></TileContent>
+						</tileContent>
+					</GenericTile>
+				</content>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

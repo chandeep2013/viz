@@ -1,0 +1,50 @@
+<core:FragmentDefinition xmlns:m="sap.m" xmlns="sap.ui.layout" xmlns:form="sap.ui.layout.form" xmlns:core="sap.ui.core">
+	<m:Dialog title="Additional Info" class="sapUiSizeCompact" contentWidth="20%">
+		<m:VBox class="sapUiSmallMargin">
+			<!--<form:SimpleForm editable="false" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4" labelSpanM="4" labelSpanS="12"
+			adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="3" columnsL="2" columnsM="2"
+			singleContainerFullSize="false">
+			<form:content>
+				<core:Title/>
+				<m:Label text="{i18n>VKM}" design="Bold" required="true"/>
+				<m:Input  value="{detail>/ZZ_VKM}" placeholder="VKM" showValueHelp="true" showSuggestion="true" valueHelpRequest="onValueHelpForVkm"/>
+			</form:content>
+		</form:SimpleForm>-->
+			<form:SimpleForm editable="false" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4" labelSpanM="4" labelSpanS="12"
+				adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="3" columnsL="2" columnsM="2"
+				singleContainerFullSize="false" id="idNonMCRForm">
+				<form:content>
+					<m:Label text="{i18n>CustCoordName}" design="Bold" required="true"/>
+					<m:Input placeholder="Mr/Ms"  id="idCoordName" editable="{products>/editable}" />
+					<m:Label text="{i18n>PONum}" design="Bold" required="true"/>
+					<m:Input  placeholder="Po Number" id="idPoNumber" editable="{products>/editable}"/>
+					<m:Label text="{i18n>CustCostCenter}" design="Bold"/>
+					<m:Input  placeholder="Customer Cost Center" id="idCustCost" editable="{products>/editable}"/>
+					<m:Label text="{i18n>CustCoordDept}" design="Bold" required="true"/>
+					<m:Input  placeholder="Customer Cost Dept" id="idCoDept" editable="{products>/editable}"/>
+					<m:Label text="{i18n>CustCompanyName}" design="Bold" required="true"/>
+					<m:Input id="idCutomerCompanyName" placeholder="Customer Company Name"  showValueHelp="true" showSuggestion="true"
+						valueHelpRequest="onCustomerCompanyName" editable="{products>/editable}"/>
+				</form:content>
+			</form:SimpleForm>
+			<form:SimpleForm editable="false" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4" labelSpanM="4" labelSpanS="12"
+				adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="3" columnsL="2" columnsM="2"
+				singleContainerFullSize="false" id="idMCRForm">
+				<form:content>
+					<m:Label text="{i18n>TaskID}" design="Bold" required="true"/>
+					<m:Input placeholder="Task ID" showValueHelp="true" showSuggestion="true" valueHelpOnly= "true" valueHelpRequest="onMCRTaskDetails" id="idTaskInfo" editable="{products>/editable}"/>
+					<m:Label text="{i18n>ResourceGroup}" design="Bold" required="true"/>
+					<m:Input placeholder="Resource Group" showValueHelp="true" showSuggestion="true" valueHelpRequest="onMCRResourceDetails" valueHelpOnly= "true" id="idResourceId" editable="{products>/editable}"/>
+					<m:Label text="{i18n>ResourceType}" design="Bold" required="true" />
+					<m:Input id="idResourceType" placeholder="Resource Type" editable="false"/>
+				</form:content>
+			</form:SimpleForm>
+		</m:VBox>
+		<m:beginButton>
+			<m:Button text="OK" press="onPressSaveCustomerDetails" id="idOkButton"></m:Button>
+		</m:beginButton>
+		<m:endButton>
+			<m:Button text="Close" press="onPressCloseAddInfo"></m:Button>
+		</m:endButton>
+	</m:Dialog>
+</core:FragmentDefinition>

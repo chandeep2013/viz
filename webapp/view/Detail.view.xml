@@ -1,0 +1,373 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.uxap" xmlns:m="sap.m" xmlns:f="sap.f"
+	xmlns:form="sap.ui.layout.form" xmlns:l="sap.ui.layout" controllerName="com.bosch.hr.swift_trv.controller.Detail"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	<m:App>
+		<m:pages>
+			<m:Page showHeader="false" id="idDetailPage" busy="{products>/busy1}">
+				<m:content>
+					<ObjectPageLayout id="ObjectPageLayout" showTitleInHeaderContent="true" alwaysShowContentHeader="false" preserveHeaderStateOnScroll="false"
+						headerContentPinnable="true" isChildPage="true" upperCaseAnchorBar="false" class="sapUiSizeCompact">
+						<headerTitle>
+							<ObjectPageDynamicHeaderTitle>
+								<expandedHeading>
+									<m:Title text="{detail>/ZZ_DEP_REQ}" wrapping="true" class="sapUiSmallMarginEnd"/>
+								</expandedHeading>
+								<snappedHeading>
+									<m:FlexBox wrap="Wrap" fitContainer="true" alignItems="Center">
+										<m:FlexBox wrap="NoWrap" fitContainer="true" alignItems="Center" class="sapUiTinyMarginEnd">
+											<f:Avatar src="sap-icon://image-viewer" displaySize="S" displayShape="Square" class="sapUiTinyMarginEnd"/>
+											<m:Title text="{detail>/ZZ_DEP_REQ}" wrapping="true"/>
+										</m:FlexBox>
+									</m:FlexBox>
+								</snappedHeading>
+								<navigationActions>
+									<m:OverflowToolbarButton type="Transparent" icon="sap-icon://full-screen" press=".handleFullScreen" tooltip="Enter Full Screen Mode"
+										visible="{= ${/actionButtonsInfo/midColumn/fullScreen} !== null }"/>
+									<m:OverflowToolbarButton type="Transparent" icon="sap-icon://exit-full-screen" press=".handleExitFullScreen" tooltip="Exit Full Screen Mode"
+										visible="{= ${/actionButtonsInfo/midColumn/exitFullScreen} !== null }"/>
+									<m:OverflowToolbarButton type="Transparent" icon="sap-icon://decline" press=".handleClose" tooltip="Close column"
+										visible="{= ${/actionButtonsInfo/midColumn/closeColumn} !== null }"/>
+								</navigationActions>
+								<actions>
+									<m:ToggleButton text="{i18n>Edit}" type="Emphasized" press=".onEditToggleButtonPress" tooltip="Edit"
+										visible="{ parts: [ {path: 'detail>/ZZ_STATUS'},{path: 'detail>/ZZ_DEP_REQ'} ], formatter: '.formatter.EditButtonVisibility' }"/>
+									<m:Button icon="sap-icon://action" type="Transparent" press="onActionSheet" tooltip="Options"
+										visible="{ parts: [{path: 'detail>/ZZ_DEP_REQ'},{path:'products>/editable'} ], formatter: '.formatter.ActionButtonVisibility' }"/>
+								</actions>
+							</ObjectPageDynamicHeaderTitle>
+						</headerTitle>
+						<headerContent>
+							<m:FlexBox wrap="Wrap" fitContainer="true" alignItems="Stretch">
+								<f:Avatar src="sap-icon://image-viewer" displaySize="L" displayShape="Square" class="sapUiTinyMarginEnd"></f:Avatar>
+								<m:VBox justifyContent="Center" class="sapUiSmallMarginEnd">
+									<m:Label text="{i18n>FromTo}" design="Bold"/>
+									<m:Text
+										text="{parts: [ {path: 'detail>/ZZ_DATV1'} ], formatter: '.formatter.onDateFormat'} - {parts: [ {path: 'detail>/ZZ_DATB1'} ], formatter: '.formatter.onDateFormat'}"/>
+								</m:VBox>
+								<m:VBox justifyContent="Center" class="sapUiSmallMarginEnd">
+									<m:Label text="{i18n>FromCntyLoc}" design="Bold"/>
+									<m:Text
+										text="{parts: [ {path: 'detail>/ZZ_FMCNTRY'} ,{path: 'detail>/CountryList'}], formatter: '.formatter.CountryName' } - {detail>/ZZ_FMLOC}"/>
+								</m:VBox>
+								<m:VBox justifyContent="Center" class="sapUiSmallMarginEnd">
+									<m:Label text="{i18n>ToCntyLoc}" design="Bold"/>
+									<m:Text
+										text="{parts: [ {path: 'detail>/ZZ_LAND1'} ,{path: 'detail>/CountryList'}], formatter: '.formatter.CountryName' } - {detail>/ZZ_LOCATION_END}"/>
+								</m:VBox>
+								<!--visible="{parts: [ {path: 'detail>/ZZ_STATUS'}], formatter: '.formatter.VisiblePendngWith' }"-->
+								<m:VBox justifyContent="Center" class="sapUiSmallMarginEnd" >
+									<m:Label text="{i18n>PendingWith}" design="Bold"/>
+									<m:Text text="{parts: [{path:'detail>/ZZ_STATUS'}, {path: 'detail>/NextApprvName'} ], formatter: '.formatter.pendingWith'}"/>
+								</m:VBox>
+							</m:FlexBox>
+						</headerContent>
+						<sections>
+							<ObjectPageSection id="idGeneralTab" title="{i18n>General}" titleUppercase="false">
+								<subSections>
+									<ObjectPageSubSection id="idObjPage">
+										<blocks>
+											<!--Frgments loading -->
+										</blocks>
+									</ObjectPageSubSection>
+								</subSections>
+							</ObjectPageSection>
+							<ObjectPageSection title="{i18n>CostAsgn}" titleUppercase="false">
+								<subSections>
+									<!--##################################### Cost Assignment Table ##############################-->
+									<ObjectPageSubSection id="idCostAsgnObjPage">
+										<blocks>
+											<m:VBox class="sapUiSmallMargin">
+												<m:Table id="idCostAssigmenTable" sticky="ColumnHeaders" selectionChange="onSelectCostAssignemnt" width="auto"
+													items="{detail>/TRV_HDRtoTRV_COST_ASGN/results}">
+													<m:infoToolbar>
+														<m:OverflowToolbar>
+															<m:Label text="{i18n>CostAsgnDetails}" wrapping="true"/>
+														</m:OverflowToolbar>
+													</m:infoToolbar>
+													<m:headerToolbar>
+														<m:OverflowToolbar>
+															<m:content>
+																<m:Button text="{i18n>Add}" icon="sap-icon://add" press="onAddCostAssignment" visible="{detail>/editable}"/>
+																<m:Button text="{i18n>Remove}" icon="sap-icon://delete" press="onDeleteRow"
+																	visible="{ parts: [ {path: 'products>/editable'},{path: 'products>/Costeditable'} ], formatter: '.formatter.CostAssignmentRemove' }"/>
+																<m:ToolbarSpacer/>
+															</m:content>
+														</m:OverflowToolbar>
+													</m:headerToolbar>
+													<m:columns>
+														<m:Column id="idCostAssingmentColumn">
+															<m:Label text="{i18n>CostAsgn}" design="Bold"/>
+														</m:Column>
+														<m:Column width="5rem" minScreenWidth="Tablet" demandPopin="true">
+															<m:Label text="{i18n>Percent}" design="Bold" required="true"/>
+														</m:Column>
+														<m:Column minScreenWidth="Tablet" demandPopin="true" width="5rem">
+															<m:Label text="{i18n>Fund}" design="Bold" required="true"/>
+														</m:Column>
+														<m:Column minScreenWidth="Tablet" demandPopin="true">
+															<m:Label text="{i18n>BudgetCntr}" design="Bold" required="true"/>
+														</m:Column>
+														<m:Column minScreenWidth="Tablet" demandPopin="true">
+															<m:Label text="{i18n>WBS}" design="Bold"/>
+														</m:Column>
+														<m:Column minScreenWidth="Tablet" demandPopin="true">
+															<m:Label text="{i18n>CostCntr}" design="Bold"/>
+														</m:Column>
+														<m:Column minScreenWidth="Tablet" demandPopin="true">
+															<m:Label text="{i18n>BudgetCode}" design="Bold" required="true"/>
+														</m:Column>
+														<m:Column id="idAddInfoColumn" minScreenWidth="Tablet" demandPopin="true" width="3rem"
+															visible="{parts: [ {path: 'detail>/TRV_HDRtoTRV_COST_ASGN/results'} ], formatter: '.formatter.onAddInfoColumnVisible'}">
+															<m:Label text="Info" design="Bold" />
+														</m:Column>
+													</m:columns>
+													<m:items>
+														<m:ColumnListItem >
+															<m:cells >
+																<m:Text text=""/>
+																<m:Text text="{detail>ZZ_PERCENT}"/>
+																<m:Text text="{detail>ZZ_GEBER}"/>
+																<m:Text text="{detail>ZZ_FISTL}"/>
+																<m:Text text="{parts: [ {path: 'detail>ZZ_FIPOS'} ], formatter: '.formatter.onWBSElement'}"/>
+																<m:Text text="{parts: [ {path: 'detail>ZZ_KOSTL'} ], formatter: '.formatter.onWBSElement'}"/>
+																<m:Text text="{detail>ZZ_FIPEX}"/>
+																<m:Link text="Info" press="onPressAddInfoRead"/>
+															</m:cells>
+														</m:ColumnListItem>
+													</m:items>
+												</m:Table>
+											</m:VBox>
+										</blocks>
+									</ObjectPageSubSection>
+								</subSections>
+							</ObjectPageSection>
+							<ObjectPageSection title="{i18n>Travel}" titleUppercase="false">
+								<subSections>
+									<!--##################################### Travel Detial Table ##############################-->
+									<ObjectPageSubSection>
+										<blocks>
+											<m:VBox class="sapUiSmallMargin">
+												<m:Table id="idTravelDetailTable" sticky="ColumnHeaders" selectionChange="onSelectTravelDetail" class="sapFDynamicPageAlignContent"
+													width="auto" items="{detail>/TRV_HDRtoTRV_travel_Data/results}" mode="MultiSelect">
+													<m:infoToolbar>
+														<m:OverflowToolbar>
+															<m:Label text="{i18n>Traveldetails}"/>
+														</m:OverflowToolbar>
+													</m:infoToolbar>
+													<m:headerToolbar>
+														<m:OverflowToolbar>
+															<m:content>
+																<m:Button text="{i18n>Add}" icon="sap-icon://add" press="onAddTravelDetail" visible="{products>/editable}"/>
+																<m:Button text="{i18n>Remove}" icon="sap-icon://delete" press="onDeleteRow"
+																	visible="{ parts: [ {path: 'products>/editable'},{path: 'products>/Traveleditable'} ], formatter: '.formatter.TravelDetailRemove' }"/>
+																<m:ToolbarSpacer/>
+															</m:content>
+														</m:OverflowToolbar>
+													</m:headerToolbar>
+													<m:columns>
+														<m:Column id="idTravelHideColumn">
+															<m:Label text="{i18n>Traveldetails}" design="Bold"/>
+														</m:Column>
+														<m:Column minScreenWidth="Tablet" demandPopin="true">
+															<m:Label text="{i18n>Traveller}" design="Bold"/>
+														</m:Column>
+														<m:Column minScreenWidth="Tablet" demandPopin="true">
+															<m:Label text="{i18n>From}" design="Bold" required="true"/>
+														</m:Column>
+														<m:Column minScreenWidth="Tablet" demandPopin="true">
+															<m:Label text="{i18n>To}" design="Bold" required="true"/>
+														</m:Column>
+														<m:Column id="depaDateTime" width="25%" minScreenWidth="Tablet" demandPopin="true">
+															<m:Label text="{i18n>Departure}" design="Bold"/>
+														</m:Column>
+														<m:Column id="arrDateTime" width="25%" minScreenWidth="Tablet" demandPopin="true">
+															<m:Label text="{i18n>Arrival}" design="Bold"/>
+														</m:Column>
+														<m:Column minScreenWidth="Tablet" demandPopin="true">
+															<m:Label text="{i18n>Mode}" design="Bold" required="true"/>
+														</m:Column>
+													</m:columns>
+													<m:items>
+														<m:ColumnListItem>
+															<m:cells>
+																<m:Text text=""/>
+																<m:Text text="{parts: [ {path: 'detail>ZZ_ZSLFDPD'} ], formatter: '.formatter.TravellerName'}"/>
+																<m:Text text="{detail>ZZ_ZFRPLACE}"/>
+																<m:Text text="{detail>ZZ_ZTOPLACE}"/>
+																<m:HBox>
+																	<m:Text text="{parts: [ {path: 'detail>ZZ_BEGDA'} ], formatter: '.formatter.onDateFormat'}"/>
+																	<m:Text text=" "/>
+																	<m:Text text="{detail>DeptTime}"/>
+																</m:HBox>
+																<m:HBox>
+																	<m:Text text="{parts: [ {path: 'detail>ZZ_ENDDA'} ], formatter: '.formatter.onDateFormat'}"/>
+																	<m:Text text=" "/>
+																	<m:Text text="{detail>ArrTime}"/>
+																</m:HBox>
+																<m:Text text="{parts: [ {path: 'detail>ZZ_ZMODE'} ], formatter: '.formatter.onTransport'}"/>
+															</m:cells>
+														</m:ColumnListItem>
+													</m:items>
+												</m:Table>
+											</m:VBox>
+										</blocks>
+									</ObjectPageSubSection>
+								</subSections>
+							</ObjectPageSection>
+							<ObjectPageSection title="{i18n>Accommodation}" titleUppercase="false">
+								<subSections>
+									<!--##################################### Accomdation Table ##############################-->
+									<ObjectPageSubSection>
+										<blocks>
+											<m:VBox>
+												<m:Table id="idAccomdationTable" selectionChange="onSelectAccom" items="{detail>/TRV_HDRtoTRV_ACCOM/results}" mode="MultiSelect"
+													sticky="ColumnHeaders">
+													<m:infoToolbar>
+														<m:OverflowToolbar>
+															<m:Label text="{i18n>Accommodation}" wrapping="true"/>
+														</m:OverflowToolbar>
+													</m:infoToolbar>
+													<m:headerToolbar>
+														<m:OverflowToolbar>
+															<m:content>
+																<m:Button text="{i18n>Add}" icon="sap-icon://add" press="onAddAccomdation" visible="{products>/editable}"/>
+																<m:Button text="{i18n>Remove}" icon="sap-icon://delete" press="onDeleteRow"
+																	visible="{ parts: [ {path: 'products>/editable'},{path: 'products>/AccomEditable'} ], formatter: '.formatter.AccomRemove' }"/>
+																<m:ToolbarSpacer/>
+															</m:content>
+														</m:OverflowToolbar>
+													</m:headerToolbar>
+													<m:columns>
+														<m:Column id="idAccommodationColumn">
+															<m:Label text="{i18n>Accommodation}" design="Bold"/>
+														</m:Column>
+														<m:Column minScreenWidth="Tablet" demandPopin="true">
+															<m:Label text="{i18n>Place}" design="Bold"/>
+														</m:Column>
+														<m:Column minScreenWidth="Tablet" demandPopin="true">
+															<m:Label text="{i18n>FromDate}" design="Bold"/>
+														</m:Column>
+														<m:Column minScreenWidth="Tablet" demandPopin="true">
+															<m:Label text="{i18n>ToDate}" design="Bold"/>
+														</m:Column>
+														<m:Column minScreenWidth="Tablet" demandPopin="true">
+															<m:Label text="{i18n>ContactPerson}" design="Bold"/>
+														</m:Column>
+													</m:columns>
+													<m:items>
+														<m:ColumnListItem>
+															<m:cells>
+																<m:Text text=""/>
+																<m:Text text="{parts: [ {path: 'detail>ZZ_ZPLACE'} ], formatter: '.formatter.onWBSElement'}"/>
+																<m:Text text="{parts: [ {path: 'detail>ZZ_BEGDA'} ], formatter: '.formatter.onDateFormat'}"/>
+																<m:Text text="{parts: [ {path: 'detail>ZZ_ENDDA'} ], formatter: '.formatter.onDateFormat'}"/>
+																<m:Text text="{parts: [ {path: 'detail>ZZ_CONTACT'} ], formatter: '.formatter.onWBSElement'}"/>
+															</m:cells>
+														</m:ColumnListItem>
+													</m:items>
+												</m:Table>
+											</m:VBox>
+										</blocks>
+									</ObjectPageSubSection>
+								</subSections>
+							</ObjectPageSection>
+							<ObjectPageSection title="{i18n>Advance}" titleUppercase="false">
+								<subSections>
+									<ObjectPageSubSection>
+										<blocks>
+											<!--##################################### Advance Table ##############################-->
+											<m:VBox>
+												<m:Table id="idAdvanceTable" selectionChange="onSelectAdv" items="{path:'detail>/advance'}" mode="MultiSelect" sticky="ColumnHeaders">
+													<m:infoToolbar visible="{ parts: [ {path: 'products>deviceVisible'} ], formatter: '.formatter.deviceVisible' }">
+														<m:OverflowToolbar>
+															<m:Label text="{i18n>Advance}" wrapping="true"/>
+														</m:OverflowToolbar>
+													</m:infoToolbar>
+													<m:headerToolbar>
+														<m:OverflowToolbar>
+															<m:content>
+																<m:Button text="{i18n>Add}" icon="sap-icon://add" press="onAddAdvance" visible="{products>/editable}"/>
+																<m:Button text="{i18n>Remove}" icon="sap-icon://delete" press="onDeleteRow"
+																	visible="{ parts: [ {path: 'products>/editable'},{path: 'products>/AdvEditable'} ], formatter: '.formatter.AdvRemove' }"/>
+																<m:ToolbarSpacer/>
+																<m:Button text="{i18n>Advance}" press="onPressAdvance" type="Emphasized"
+																	tooltip="Please Click on the button to know the advance eligibility as per policy"/>
+															</m:content>
+														</m:OverflowToolbar>
+													</m:headerToolbar>
+													<m:columns>
+														<m:Column id="idAdvanceColumn">
+															<m:Label text="{i18n>AdvanceDetails}" design="Bold"/>
+														</m:Column>
+														<m:Column minScreenWidth="Tablet" demandPopin="true">
+															<m:Label text="{i18n>Currency}" design="Bold"/>
+														</m:Column>
+														<m:Column minScreenWidth="Tablet" demandPopin="true">
+															<m:Label text="{i18n>Boarding}" design="Bold"/>
+														</m:Column>
+														<m:Column minScreenWidth="Tablet" demandPopin="true">
+															<m:Label text="{i18n>Lodging}" design="Bold"/>
+														</m:Column>
+														<m:Column minScreenWidth="Tablet" demandPopin="true">
+															<m:Label text="{i18n>Others}" design="Bold"/>
+														</m:Column>
+														<m:Column minScreenWidth="Tablet" demandPopin="true">
+															<m:Label text="{i18n>Total}" design="Bold"/>
+														</m:Column>
+													</m:columns>
+													<m:items>
+														<m:ColumnListItem>
+															<m:cells>
+																<m:Text text=""/>
+																<m:Text text="{parts: [ {path: 'detail>currency_key'} ], formatter: '.formatter.onWBSElement'}"/>
+																<m:Text text="{detail>boarding}"/>
+																<m:Text text="{detail>lodging}"/>
+																<m:Text text="{detail>others}"/>
+																<m:Text text="{detail>total}"/>
+															</m:cells>
+														</m:ColumnListItem>
+													</m:items>
+												</m:Table>
+											</m:VBox>
+										</blocks>
+									</ObjectPageSubSection>
+								</subSections>
+							</ObjectPageSection>
+							<ObjectPageSection title="{i18n>Confirmation}" titleUppercase="false" visible="{detail>/view/international}" class="ConfirmationCalss">
+								<subSections>
+									<!--##################################### Confirmation Table ##############################-->
+									<ObjectPageSubSection>
+										<blocks>
+											<m:VBox>
+												<m:Text text="{i18n>ConfirmationDesc}"/>
+											</m:VBox>
+											<m:VBox>
+												<m:HBox>
+													<m:CheckBox editable="{products>/editable}" id="idConfirm" selected="{detail>/view/confirm}"/>
+													<m:Text text="{i18n>Read}" class="TextClass"/>
+												</m:HBox>
+											</m:VBox>
+										</blocks>
+									</ObjectPageSubSection>
+								</subSections>
+							</ObjectPageSection>
+						</sections>
+						<footer>
+							<m:OverflowToolbar>
+								
+								<m:Button type="Reject" text="{i18n>Delete}" press="onDeletePress"
+									visible="{ parts: [ {path: 'detail>/ZZ_STATUS'}], formatter: '.formatter.ButtonVisibilityFormatter_Delete' }"/>
+								<m:ToolbarSpacer/>
+								<m:Button type="Emphasized" text="{i18n>Save}" press="onPressSave" id="idSaveButton"
+									visible="{ parts: [ {path: 'products>/Status'},{path: 'products>/dateChange'} ], formatter: '.formatter.ButtonVisibilityFormatter_Save' }"/>
+								<m:Button type="Accept" text="{i18n>Submit}" press="onPressSubmit"
+									visible="{ parts: [ {path: 'products>/Status'} ], formatter: '.formatter.ButtonVisibilityFormatter_Submit' }"/>
+								<!-- <m:Button type="Reject" text="Cancel" press="onPressCancel"/> -->
+							</m:OverflowToolbar>
+						</footer>
+					</ObjectPageLayout>
+				</m:content>
+			</m:Page>
+		</m:pages>
+	</m:App>
+</mvc:View>

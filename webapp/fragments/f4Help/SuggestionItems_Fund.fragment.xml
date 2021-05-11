@@ -1,0 +1,24 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+    <Dialog  title="Fund" class="sapUiSizeCompact" afterClose="onAfterCloseF4Help">
+    	<HeaderContainer>
+    		<Text text=""></Text><!--placeholder="Fund"-->
+    		<SearchField id="idSearchFund"  search="OnSearchFund" liveChange="OnSearchFund" width="12rem"></SearchField>
+    		<MenuButton icon="sap-icon://sort">
+                    <menu>
+                        <Menu >
+                            <MenuItem text="Ascending" press="onSortFund" />
+                            <MenuItem text="Descending" press="onSortFund" />
+                        </Menu>
+                    </menu>
+                </MenuButton>
+    	</HeaderContainer>
+        <VBox>
+            <List id="idList" items="{path:'detail>/Fund_F4_Help',templateShareable:true}">
+                <StandardListItem type="Active" press="_handleValueHelpClose_fund" title="{detail>fincode}"  description="{detail>beschr}" />
+            </List>
+        </VBox>
+        <endButton>
+        	<Button text="Cancel" type="Reject" press="onFundCancel" />
+        </endButton>
+    </Dialog>
+</core:FragmentDefinition>

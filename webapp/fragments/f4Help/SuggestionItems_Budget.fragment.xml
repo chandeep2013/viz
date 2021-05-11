@@ -1,0 +1,26 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<Dialog title="Budget Center" class="sapUiSizeCompact" afterClose="onAfterCloseF4Help">
+		<HeaderContainer>
+			<Text text=""></Text>
+			<!--placeholder="BudgetCenter"-->
+			<SearchField id="idSearchBudgetCenter" search="OnSearchBudgetCenter" liveChange="OnSearchBudgetCenter" width="12rem"></SearchField>
+			<MenuButton icon="sap-icon://sort">
+				<menu>
+					<Menu >
+						<MenuItem text="Ascending" press="onSortBudCenter"/>
+						<MenuItem text="Descending" press="onSortBudCenter"/>
+					</Menu>
+				</menu>
+			</MenuButton>
+		</HeaderContainer>
+		<VBox>
+			<List id="idListBudCenter" items="{path:'detail>/BudgetCenter',templateShareable:true}" enableBusyIndicator="true" busyIndicatorDelay="1"
+				growing="true" growingThreshold="9" growingScrollToLoad="true">
+				<StandardListItem type="Active" press="_handleValueHelpClose_budget" title="{detail>ZzFundC}" description="{detail>ZzFundDes}"/>
+			</List>
+		</VBox>
+		<endButton>
+			<Button text="Cancel" type="Reject" press="onBudCenterCancel"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

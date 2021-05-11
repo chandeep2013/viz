@@ -1,0 +1,181 @@
+<mvc:View xmlns="sap.uxap" xmlns:m="sap.m" xmlns:f="sap.f" xmlns:form="sap.ui.layout.form" xmlns:mvc="sap.ui.core.mvc"
+	xmlns:l="sap.ui.layout" xmlns:core="sap.ui.core" controllerName="com.bosch.hr.swift_trv.controller.Ticketing"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	<m:App>
+		<m:pages>
+			<m:Page showHeader="false">
+				<m:content>
+					<ObjectPageLayout id="ObjectPageTicketLayout" showTitleInHeaderContent="true" alwaysShowContentHeader="false"
+						preserveHeaderStateOnScroll="false" headerContentPinnable="true" isChildPage="true" upperCaseAnchorBar="false" class="sapUiSizeCompact">
+						<headerTitle>
+							<ObjectPageDynamicHeaderTitle>
+								<expandedHeading>
+									<m:Title text="{i18n>Ticketing} - {ticketModel>/TravelPlan}" wrapping="true" class="sapUiSmallMarginEnd"/>
+								</expandedHeading>
+								<snappedHeading>
+									<m:FlexBox wrap="Wrap" fitContainer="true" alignItems="Center">
+										<m:FlexBox wrap="NoWrap" fitContainer="true" alignItems="Center" class="sapUiTinyMarginEnd">
+											<f:Avatar src="sap-icon://image-viewer" displaySize="S" displayShape="Square" class="sapUiTinyMarginEnd"/>
+											<m:Title text="{i18n>Ticketing}" wrapping="true"/>
+										</m:FlexBox>
+									</m:FlexBox>
+								</snappedHeading>
+								<navigationActions>
+									<m:OverflowToolbarButton type="Transparent" icon="sap-icon://full-screen" press=".handleFullScreen" tooltip="Enter Full Screen Mode"
+										visible="{= ${/actionButtonsInfo/midColumn/fullScreen} !== null }"/>
+									<m:OverflowToolbarButton type="Transparent" icon="sap-icon://exit-full-screen" press=".handleExitFullScreen" tooltip="Exit Full Screen Mode"
+										visible="{= ${/actionButtonsInfo/midColumn/exitFullScreen} !== null }"/>
+									<m:OverflowToolbarButton type="Transparent" icon="sap-icon://decline" press=".handleClose" tooltip="Close column"
+										visible="{= ${/actionButtonsInfo/midColumn/closeColumn} !== null }"/>
+								</navigationActions>
+								<actions>
+									<m:ToggleButton text="{i18n>Comments}" type="Emphasized" press="onComnetButtonPress" visible="false"/>
+									<!--<m:ToggleButton text="{i18n>Edit}" type="Emphasized" press=".onEditToggleButtonPress"/>-->
+								</actions>
+							</ObjectPageDynamicHeaderTitle>
+						</headerTitle>
+						<headerContent>
+							<m:FlexBox wrap="Wrap" fitContainer="true" alignItems="Stretch">
+								<f:Avatar src="sap-icon://image-viewer" displaySize="L" displayShape="Square" class="sapUiTinyMarginEnd"></f:Avatar>
+								<m:VBox justifyContent="Center" class="sapUiSmallMarginEnd">
+									<m:Label text="{i18n>User}" design="Bold"/>
+									<m:Text text="{ticketModel>/EmpName}"/>
+								</m:VBox>
+								<m:VBox justifyContent="Center" class="sapUiSmallMarginEnd">
+									<m:Label text="{i18n>EmployeeNO}" design="Bold"/>
+									<m:Text text="{ticketModel>/EmpNo}"/>
+								</m:VBox>
+								<m:VBox justifyContent="Center" class="sapUiSmallMarginEnd">
+									<m:Label text="{i18n>EmailId}" design="Bold"/>
+									<m:Text text="{ticketModel>/OfcEmailId}"/>
+								</m:VBox>
+								<m:VBox justifyContent="Center" class="sapUiSmallMarginEnd">
+									<m:Label text="{i18n>Status}" design="Bold"/>
+									<m:ObjectNumber number="{ticketModel>/StatusText}" state="Success"/>
+								</m:VBox>
+								<m:VBox justifyContent="Center" class="sapUiSmallMarginEnd">
+									<m:Label id="idTicketingAmount" text="" design="Bold"/>
+									<m:ObjectNumber id="status1" state="Success"/>
+								</m:VBox>
+							</m:FlexBox>
+						</headerContent>
+						<sections>
+							<ObjectPageSection title="{i18n>General}" titleUppercase="false">
+								<subSections>
+									<ObjectPageSubSection id="idTicketPage">
+										<blocks>
+											<!-- Fragment loading..!!!!!!!!! -->
+										</blocks>
+									</ObjectPageSubSection>
+								</subSections>
+							</ObjectPageSection>
+							<ObjectPageSection title="{i18n>Details}" titleUppercase="false">
+								<subSections>
+									<ObjectPageSubSection>
+										<blocks>
+											<m:VBox>
+												<m:IconTabBar>
+													<m:items>
+														<m:IconTabFilter icon="sap-icon://hint">
+															<m:Label id="empinfo" wrapping="true" visible="false"
+																text="Please select one of the option and Submit it for Ticket confirmation. Should you require specific itinerary, kindly enter the same in comments and send the request back. This may require additional approvals "/>
+															<m:Panel id="idOption1Panel" expandable="true" headerText="{i18n>Option1}" width="auto" class="sapUiResponsiveMargin" expanded="true">
+																<m:headerToolbar>
+																	<m:OverflowToolbar>
+																		<m:content>
+																			<m:CheckBox id="c1" select="onCheckBoxSelect" text="{i18n>Option1}" editable="{properties>/radeditable}"/>
+																		</m:content>
+																	</m:OverflowToolbar>
+																</m:headerToolbar>
+																<m:content>
+																	<!-- Frgamnet loading -->
+																</m:content>
+															</m:Panel>
+															<m:Panel id="idOption2Panel" expandable="true" headerText="{i18n>Option2} " width="auto" class="sapUiResponsiveMargin" expanded="true">
+																<m:headerToolbar>
+																	<m:OverflowToolbar>
+																		<m:content>
+																			<m:CheckBox id="c2" select="onCheckBoxSelect" text="{i18n>Option2}" editable="{properties>/radeditable}"/>
+																		</m:content>
+																	</m:OverflowToolbar>
+																</m:headerToolbar>
+																<m:content>
+																	<!-- Frgamnet loading -->
+																</m:content>
+															</m:Panel>
+															<m:Panel id="idOption3Panel" expandable="true" headerText="{i18n>Option3}" width="auto" class="sapUiResponsiveMargin" expanded="true">
+																<m:headerToolbar>
+																	<m:OverflowToolbar>
+																		<m:content>
+																			<m:CheckBox id="c3" select="onCheckBoxSelect" text="{i18n>Option3}" editable="{properties>/radeditable}"/>
+																		</m:content>
+																	</m:OverflowToolbar>
+																</m:headerToolbar>
+																<m:content>
+																	<!-- Frgamnet loading -->
+																</m:content>
+															</m:Panel>
+															<m:Panel id="idOption4Panel" visible="false" expandable="true" headerText="{i18n>Option4}" width="auto" class="sapUiResponsiveMargin"
+																expanded="true">
+																<m:headerToolbar>
+																	<m:OverflowToolbar>
+																		<m:content>
+																			<m:CheckBox id="c4" select="onCheckBoxSelect" text="{i18n>Option4}" editable="{properties>/radeditable}"/>
+																		</m:content>
+																	</m:OverflowToolbar>
+																</m:headerToolbar>
+																<m:content>
+																	<!-- Frgamnet loading -->
+																</m:content>
+															</m:Panel>
+															<m:VBox class="sapUiSmallMargin">
+																<m:CheckBox id="c5" text="{i18n>Agree}" editable="{properties>/radeditable}"/>
+																<m:TextArea id="txtarea5" placeholder="Comments" width="99%" height="4rem" change="onChangeComments"></m:TextArea>
+															</m:VBox>
+														</m:IconTabFilter>
+														<m:IconTabFilter icon="sap-icon://attachment">
+															<m:UploadCollection id="UploadCollection" maximumFilenameLength="55" multiple="true" uploadUrl="" showSeparators="None"
+																change="onFileUpload" fileDeleted="onFileDeleted" fileRenamed="onFileRenamed" fileSizeExceed="onFileSizeExceed"
+																typeMissmatch="onTypeMissmatch" uploadComplete="onUploadComplete" class="uploadCollectionClass margin_top_10" items="{new>/Files}">
+																<m:UploadCollectionItem fileName="{new>FileName}" mimeType="{ path: 'new>FileName', formatter: '.formatter.getFileType' }"
+																	url="{new>FileUrl}" visibleEdit="false" visibleDelete="true" thumbnailUrl=""/>
+															</m:UploadCollection>
+														</m:IconTabFilter>
+														<m:IconTabFilter icon="sap-icon://comment">
+															<m:List showSeparators="Inner" items="{Comments>/}">
+																<m:FeedListItem sender="{Comments>Dname}"
+																	timestamp="{ parts: [{path: 'Comments>Erdat'} ], formatter: '.formatter.formatTicketCommentsDate' }" text="{Comments>Comnt}"/>
+															</m:List>
+															<!--info="{Comments>Pernr}" -->
+														</m:IconTabFilter>
+													</m:items>
+												</m:IconTabBar>
+												<form:SimpleForm editable="false" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4" labelSpanM="4" labelSpanS="4"
+													adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="3" columnsL="2" columnsM="2"
+													singleContainerFullSize="false">
+													<form:content>
+														<core:Title/>
+														<m:Label design="Bold"/>
+														<m:Label design="Bold"/>
+														<core:Title/>
+													</form:content>
+												</form:SimpleForm>
+											</m:VBox>
+										</blocks>
+									</ObjectPageSubSection>
+								</subSections>
+							</ObjectPageSection>
+						</sections>
+						<footer>
+							<m:OverflowToolbar>
+								<m:ToolbarSpacer/>
+								<m:Button id="sendback" type="Emphasized" text="{i18n>SendBack}" press="onPressSendBack"/>
+								<m:Button id="accept" type="Accept" text="{i18n>Accept}" press="onPressAccept"/>
+							</m:OverflowToolbar>
+						</footer>
+					</ObjectPageLayout>
+				</m:content>
+			</m:Page>
+		</m:pages>
+	</m:App>
+</mvc:View>

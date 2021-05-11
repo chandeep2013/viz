@@ -1,0 +1,130 @@
+<core:FragmentDefinition xmlns:m="sap.m" xmlns="sap.ui.layout" xmlns:form="sap.ui.layout.form" xmlns:core="sap.ui.core"
+	xmlns:file="sap.ui.unified">
+	<m:VBox class="sapUiSmallMargin">
+		<form:SimpleForm editable="false" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4" labelSpanM="4" labelSpanS="12"
+			adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="3" columnsL="2" columnsM="2"
+			singleContainerFullSize="false">
+			<form:content>
+				<core:Title/>
+				<m:Label text="{i18n>TripStart}" design="Bold"/>
+				<m:HBox>
+					<m:DatePicker value="{detail>/ZZ_DATV1}" displayFormat="dd/MM/yyyy" valueFormat="yyyyMMdd" change="onChangeTravelDate"
+						editable="{ parts: [ {path: 'detail>/dateChange'}, {path: 'products>/editable'},{path: 'detail>/StartDateEditable'} ], formatter: '.formatter.onDateChange' }"/>
+					<m:TimePicker value="00:00" valueFormat="HH:mm" displayFormat="HH:mm"
+						editable="{ parts: [ {path: 'detail>/dateChange'}, {path: 'products>/editable'},{path: 'detail>/StartDateEditable'} ], formatter: '.formatter.onDateChange' }"/>
+				</m:HBox>
+				<m:Label text="{i18n>Tripend}" design="Bold"/>
+				<m:HBox>
+					<m:DatePicker value="{detail>/ZZ_DATB1}" displayFormat="dd/MM/yyyy" valueFormat="yyyyMMdd" change="onChangeTravelDate"
+						editable="{ parts: [ {path: 'detail>/dateChange'}, {path: 'products>/editable'} ], formatter: '.formatter.onDateChange' }"/>
+					<m:TimePicker value="00:00" valueFormat="HH:mm" displayFormat="HH:mm"
+						editable="{ parts: [ {path: 'detail>/dateChange'}, {path: 'products>/editable'} ], formatter: '.formatter.onDateChange' }"/>
+				</m:HBox>
+				<m:Label text="{i18n>FromCnty}" design="Bold"/>
+				<!--<m:Select autoAdjustWidth="true" selectedKey="{detail>/ZZ_FMCNTRY}" items="{ path: 'detail>/CountryList',templateShareable:true}"
+					enabled="false">
+					<core:Item key="{detail>MOLGA}" text="{detail>LTEXT}"/>
+				</m:Select>-->
+				<m:ComboBox selectedKey="{detail>/ZZ_FMCNTRY}" items="{ path: 'detail>/CountryList',templateShareable:true}" editable="false">
+					<core:Item key="{detail>MOLGA}" text="{detail>LTEXT}"/>
+				</m:ComboBox>
+				<m:Label text="{i18n>FromLoc}" design="Bold"/>
+				<m:Input value="{detail>/ZZ_FMLOC}" editable="false"/>
+				<m:Label text="{i18n>ToCnty}" design="Bold"/>
+				<!--<m:Select autoAdjustWidth="true" selectedKey="{detail>/ZZ_LAND1}" items="{ path: 'detail>/CountryList',templateShareable:true}"
+					enabled="false">
+					<core:Item key="{detail>MOLGA}" text="{detail>LTEXT}"/>
+				</m:Select>-->
+				<m:ComboBox selectedKey="{detail>/ZZ_LAND1}" items="{ path: 'detail>/CountryList',templateShareable:true}" editable="false">
+					<core:Item key="{detail>MOLGA}" text="{detail>LTEXT}"/>
+				</m:ComboBox>
+				<m:Label text="{i18n>ToLoc}" design="Bold"/>
+				<m:Input placeholder="To Location" value="{detail>/ZZ_LOCATION_END}" editable="false"/>
+				<m:Label text="{i18n>Duration}" design="Bold"/>
+				<m:Input value="{detail>/ZZ_ZDURN}" editable="false"/>
+				<m:Label text="{i18n>TravelCategory}" design="Bold" visible="false"/>
+				<m:Input value="{detail>/ZZ_ZCATG}" editable="false" visible="false"/>
+				<m:Label text="{i18n>VisaCategory}" design="Bold"/>
+				<m:ComboBox selectedKey="{detail>/ZZ_ZVISAT}" items="{detail>/visaCategory}" editable="false">
+					<core:Item key="{detail>DOMVALUE_L}" text="{detail>DDTEXT}"/>
+				</m:ComboBox>
+				<!--	<m:Select items="{detail>/visaCategory}" enabled="false" selectedKey="{detail>/ZZ_ZVISAT}" width="100%">
+					<core:Item key="{detail>DOMVALUE_L}" text="{detail>DDTEXT}"/>
+				</m:Select>-->
+				<!--Personal Trips-->
+				<m:Label text="{i18n>PersonalTravel}" design="Bold"
+					visible="{parts:[{path:'detail>/ZZ_TRV_TYP'}, {path:'detail>/ZZ_SMODID'}], formatter: '.formatter.VisiblePersonalTrip'}"/>
+				<m:ComboBox change="OnPersonalTravelSelect" placeholder="Select"
+					selectedKey="{parts:[{path:'detail>/PersFlag'}], formatter: '.formatter.PersFlagSelectedKey'}"
+					visible="{parts:[{path:'detail>/ZZ_TRV_TYP'}, {path:'detail>/ZZ_SMODID'}], formatter: '.formatter.VisiblePersonalTrip'}"
+					editable="{detail>/editable}">
+					<core:Item key="01" text="Yes"/>
+					<core:Item key="02" text="No"/>
+				</m:ComboBox>
+				<m:Label text="{i18n>StartDate}" design="Bold"
+					visible="{parts:[{path:'detail>/PersFlag'}], formatter: '.formatter.VisiblePersonalTripDates'}"/>
+				<m:DatePicker displayFormat="dd/MM/yyyy" valueFormat="yyyyMMdd" value="{detail>/Personal_SDate}" change="onPersonalDateChange"
+					valueState="{detail>/PersonalError}" visible="{parts:[{path:'detail>/PersFlag'}], formatter: '.formatter.VisiblePersonalTripDates'}"
+					editable="{detail>/editable}"/>
+				<m:Label text="{i18n>EndDate}" design="Bold" visible="{parts:[{path:'detail>/PersFlag'}], formatter: '.formatter.VisiblePersonalTripDates'}"/>
+				<m:DatePicker displayFormat="dd/MM/yyyy" valueFormat="yyyyMMdd" value="{detail>/Personal_EDate}" change="onPersonalDateChange"
+					valueState="{detail>/PersonalError}" visible="{parts:[{path:'detail>/PersFlag'}], formatter: '.formatter.VisiblePersonalTripDates'}"
+					editable="{detail>/editable}"/>
+				<core:Title/>
+				<m:Label text="{i18n>Insurance}" design="Bold"/>
+				<m:Select selectedKey="{detail>/ZZ_ZINSUR}" items="{detail>/insurance}" enabled="{detail>/editable}" width="100%">
+					<core:Item key="{detail>DOMVALUE_L}" text="{detail>DDTEXT}"/>
+				</m:Select>
+				<m:Label text="{i18n>MealPref}" design="Bold"/>
+				<m:Select selectedKey="{detail>/ZZ_ZMEAL}" items="{detail>/meal}" enabled="{detail>/editable}" width="100%">
+					<core:Item key="{detail>DOMVALUE_L}" text="{detail>DDTEXT}"/>
+				</m:Select>
+				<m:Label text="{i18n>Purpose}" design="Bold" required="true"/>
+				<m:Input placeholder="Purpose" value="{detail>/ZZ_KUNDE}" editable="{detail>/editable}" valueState="{detail>/view/ZZ_KUNDE_ERROR}"/>
+				<m:Label text="{i18n>MobileNo}" design="Bold" required="true"/>
+				<m:Input placeholder="Mobile No" value="{detail>/ZZ_MOBILE}" editable="{detail>/editable}" type="Number"
+					valueState="{detail>/view/ZZ_MOBILE_ERROR}"/>
+				<m:Label text="{i18n>TravelTo}" design="Bold" required="true"/>
+				<m:Select selectedKey="{detail>/ZZ_CATID}" items="{path: 'detail>/subtype'}" enabled="{detail>/editable}" width="100%"
+					valueState="{detail>/view/ZZ_CATID_ERROR}">
+					<core:Item key="{detail>ZZ_DEP_SUB_TYPE}" text="{detail>ZZ_SUB_DEP_DESC}"/>
+				</m:Select>
+				<m:Label text="{i18n>SimRequired}" design="Bold" required="true"
+					visible="{parts: [ {path: 'detail>/ZZ_SMODID'} ], formatter: '.formatter.DomeVisible'}"/>
+				<m:Select selectedKey="{ parts: [{path: 'detail>/ZZ_SIM_REQ_KEY'} ], formatter: '.formatter.onSmCardRequiredKey' }"
+					enabled="{detail>/editable}" width="100%" change="onSelectSimCard"
+					visible="{parts: [ {path: 'detail>/ZZ_SMODID'} ], formatter: '.formatter.DomeVisible'}">
+					<core:Item key="P" text="Please Select"/>
+					<core:Item key="Y" text="Yes"/>
+					<core:Item key="N" text="No"/>
+				</m:Select>
+				<m:Label text="{i18n>SimType}" design="Bold"
+					visible="{parts: [ {path: 'detail>/ZZ_SIM_REQ_KEY'} ], formatter: '.formatter.onVisibleSimTypeInternet'}"/>
+				<m:Select enabled="{detail>/editable}" width="100%" selectedKey="{detail>/ZZ_SIM_TYP_KEY}" valueState="{detail>/view/ZZ_SIM_REQ__KEY_ERROR}"
+					visible="{parts: [ {path: 'detail>/ZZ_SIM_REQ_KEY'} ], formatter: '.formatter.onVisibleSimTypeInternet'}">
+					<core:Item key="P" text="Please select"></core:Item>
+					<core:Item key="NO" text="Normal"></core:Item>
+					<core:Item key="MI" text="Micro"></core:Item>
+					<core:Item key="NA" text="Nano"></core:Item>
+				</m:Select>
+				<m:Label text="{i18n>InternetReq}" design="Bold"
+					visible="{parts: [ {path: 'detail>/ZZ_SIM_REQ_KEY'} ], formatter: '.formatter.onVisibleSimTypeInternet'}"/>
+				<m:Select id="idSimDataRequired" enabled="{detail>/editable}" width="100%" selectedKey="{data>/ZZ_SIM_DATA_KEY}"
+					change="onChangeDataRequired" visible="{parts: [ {path: 'detail>/ZZ_SIM_REQ_KEY'} ], formatter: '.formatter.onVisibleSimTypeInternet'}">
+					<core:Item key="P" text="Please select"></core:Item>
+					<core:Item key="Y" text="Yes"></core:Item>
+					<core:Item key="N" text="No"></core:Item>
+				</m:Select>
+				<m:Label text="{i18n>VisaAvailability}" design="Bold"
+					visible="{parts: [ {path: 'detail>/ZZ_SMODID'} ], formatter: '.formatter.DomeVisible'}"/>
+				<m:Select selectedKey="{detail>/view/visaExist}" enabled="{detail>/editable}" width="100%" change="onSelectVisaAvailability"
+					visible="{parts: [ {path: 'detail>/ZZ_SMODID'} ], formatter: '.formatter.DomeVisible'}">
+					<core:Item key="" text="No Valid Visa"/>
+					<core:Item key="X" text="Zip and upload Passport and Visa"/>
+				</m:Select>
+				<m:Label></m:Label>
+				<m:Button text="{i18n>VisaDetails}" press="onPressVisaDetails" tooltip="click to enter Visa Details" visible="{parts: [ {path: 'detail>/view/visaExist'} ], formatter: '.formatter.onVisibleVisaItems'}"/>
+			</form:content>
+		</form:SimpleForm>
+	</m:VBox>
+</core:FragmentDefinition>

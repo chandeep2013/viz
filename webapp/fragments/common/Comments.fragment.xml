@@ -1,0 +1,23 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<Dialog type="Message" contentWidth="55%" contentHeight="35%" showHeader="false">
+		<subHeader>
+			<Toolbar>
+				<content>
+					<ToolbarSpacer/>
+					<Text text="Comments" class="labelColor"></Text>
+					<ToolbarSpacer/>
+					<Button icon="sap-icon://decline" tooltip="{i18n>declineStatus}" press="pressDecline"/>
+				</content>
+			</Toolbar>
+		</subHeader>
+		<content>
+			<FeedInput showIcon="true" maxLength="1000" post="postComment" class="feedInput"/>
+			<List showSeparators="Inner" >
+				<FeedListItem sender="Test" info="Manager1" timestamp="May22-2020"
+					text="Check date"/>
+				<FeedListItem sender="check" info="Manager2" timestamp="May22-2020"
+					text="Check loactaion"/>
+			</List>
+		</content>
+	</Dialog>
+</core:FragmentDefinition>

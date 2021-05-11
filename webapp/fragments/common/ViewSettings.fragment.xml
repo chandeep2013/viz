@@ -1,0 +1,13 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<ViewSettingsDialog title="Group" class="sapUiSizeCompact" confirm="handleConfirm">
+		<!-- <sortItems >
+			<ViewSettingsItem text="Request No" key="RequestNo" selected="true" />
+			<ViewSettingsItem text="Pending With" key="pendingWith" />
+			<ViewSettingsItem text="Status" key="Status" />
+		</sortItems> -->
+		<groupItems>
+			<ViewSettingsItem text="Pending With" key="pendingWith" selected="false"/>
+			<ViewSettingsItem text="Status" key="Status"/>
+		</groupItems>
+	</ViewSettingsDialog>
+</core:FragmentDefinition>
